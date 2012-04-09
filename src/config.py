@@ -17,6 +17,9 @@ WORLD_NAME = "tygra.world"
 # up, down, left right
 MOVEMENT_KEYS = [K_w, K_s, K_a, K_d]
 
+# Disjoint identifiers for movement
+UP, DOWN, LEFT, RIGHT = MOVEMENT_KEYS
+
 MAGIC_ATTACK_KEY = K_SPACE
 
 GAME_IMAGES = "images"

@@ -24,7 +24,7 @@ class GameState(State):
 	'''
 		State for game playing mode.
 	'''
-	
+
 	bgGroup = pygame.sprite.OrderedUpdates()
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
@@ -50,60 +50,62 @@ class GameState(State):
 			self.hudSlot[i] = Actor(IMG_SLOT,-1)
 			self.hudSlot[i].setPos(50,120+i*120)
 			self.guiGroup.add(self.hudSlot[i])
-			
+
 		self.updateHudHealth()
 
+		'''TODO: FIX MUSIC
 		pygame.mixer.init()
-		filename = "worldAmbient.mp3"
+		filename = "worldAmbient.ogg"
 		path = os.path.join(util.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
+		'''
 
 	def __del__(self):
 		# transition to another state
 		pass
-		
+
 	def loadPlayer(self):
 		self.player = Player(self)
 		GameState.playerGroup.add(self.player)
-	
+
 	def update(self):
 		self.checkCollisions()
 		State.update(self);
-		
+
 		GameState.guiGroup.update()
 		GameState.playerGroup.update()
-		
+
 	def updateHudHealth(self):
 		if self.health < 1 or self.health > 20:
 			return
-		
+
 		full = self.health/2
 		halve = self.health%2
-		
+
 		if len(self.hudHearts) != full:
 			while len(self.hudHearts) < full:
 				self.hudHearts.append(Actor(IMG_HEART,-1))
 				GameState.guiGroup.add(self.hudHearts[-1])
-				
+
 			while len(self.hudHearts) > full:
 				GameState.guiGroup.remove(self.hudHearts.pop())
-				
+
 			for i in range(0,full):
 				self.hudHearts[i].setPos(WIDTH-25,HEIGHT-50-i*60)
-				
+
 		if halve == 1:
 			GameState.guiGroup.add(self.hudHeartsHalf)
 			self.hudHeartsHalf.setPos(WIDTH-25, HEIGHT-50-full*60)
 		else:
 			self.hudHeartsHalf.kill()
-	
+
 	def handleEvent(self):
 		# handle mouse
 		mousePos = Vector2(pygame.mouse.get_pos())
 		self.player.orient(mousePos)
-			
+
 		# For each event that occurs this frame
 		for event in pygame.event.get():
 			# If user exits the window
@@ -112,7 +114,7 @@ class GameState(State):
 
 			# monitor keyboard
 			self.handleKey(event)
-		
+
 	def handleKey(self, event):
 		'''
 			Handle input from user keyboard
@@ -121,16 +123,10 @@ class GameState(State):
 			# exit game
 			if event.key == K_ESCAPE:
 				sys.exit(1)
-			if event.key == MOVEMENT_KEYS[0]:
-				self.player.move(0)
-			if event.key == MOVEMENT_KEYS[1]:
-				self.player.move(1)
-			if event.key == MOVEMENT_KEYS[2]:
-				self.player.move(2)
-			if event.key == MOVEMENT_KEYS[3]:
-				self.player.move(3)
-            		if event.key == MAGIC_ATTACK_KEY:
-                		self.player.useMagic()
+			if event.key in MOVEMENT_KEYS:
+				self.player.move(event.key)
+			if event.key == MAGIC_ATTACK_KEY:
+				self.player.useMagic()
 			# testing
 			if event.key == K_DOWN:
 				self.health -= 1
@@ -140,23 +136,17 @@ class GameState(State):
 				self.updateHudHealth()
 
 		elif event.type == pygame.KEYUP:
-			if event.key == MOVEMENT_KEYS[0]:
-				self.player.unMove(0)
-			if event.key == MOVEMENT_KEYS[1]:
-				self.player.unMove(1)
-			if event.key == MOVEMENT_KEYS[2]:
-				self.player.unMove(2)
-			if event.key == MOVEMENT_KEYS[3]:
-				self.player.unMove(3)
+			if event.key in MOVEMENT_KEYS:
+				self.player.unMove(event.key)
 
 		elif event.type == pygame.MOUSEBUTTONDOWN:
             		if pygame.mouse.get_pressed()[0]:
                 		self.player.swingSword()
             		if pygame.mouse.get_pressed()[2]:
                 		self.player.shootBow()
-			
+
 	def checkCollisions(self):
-		# Check for atLayer collisions 
+		# Check for atLayer collisions
 		for hit in pygame.sprite.spritecollide(self.player, self.background.atGroup, 0):
 			self.player.collideWall(hit)
 
@@ -187,17 +177,17 @@ class GameState(State):
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ",mmap
-		
+
 	def draw(self):
 		#draw background
 		#self.main.screen.blit(self.background, self.background.get_rect())
-		self.background.drawTerrain(self.main.screen);	
+		self.background.drawTerrain(self.main.screen);
 
-		# draw player	
+		# draw player
 		GameState.playerGroup.draw(self.main.screen)
-		
+
 		# draw gui
 		GameState.guiGroup.draw(self.main.screen)
-		
+
 		# flip screen
 		State.draw(self)
