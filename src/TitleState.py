@@ -69,9 +69,9 @@ class TitleState(State):
 				if event.key == K_ESCAPE:
 					sys.exit(0)
 				if event.key == K_RETURN:
-					pygame.mixer.music.stop()
-					pygame.mixer.music.load("../data/sounds/HeroOh.mp3")
-					pygame.mixer.music.play()				
+					#pygame.mixer.music.stop()
+					#pygame.mixer.music.load("../data/sounds/HeroOh.mp3")
+					#pygame.mixer.music.play()				
 					self.ready = True
 					self.tick = 0
 					self.tickInterval = 120
