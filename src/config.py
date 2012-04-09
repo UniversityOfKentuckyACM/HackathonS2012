@@ -9,7 +9,10 @@ FRAME_RATE = 60
 TILEX = 32
 TILEY = 32
 
-GAME_TITLE = "Hackathon!"
+GAME_TITLE = "Tygra"
+
+# Points us to the name of the world file
+WORLD_NAME = "tygra.world"
 
 # up, down, left right
 MOVEMENT_KEYS = [K_w, K_s, K_a, K_d]

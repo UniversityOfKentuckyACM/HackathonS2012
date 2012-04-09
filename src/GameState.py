@@ -43,9 +43,9 @@ class GameState(State):
 		self.hudHearts = []
 		self.hudHeartsHalf = Actor(IMG_HEART2,-1)
 		self.hudSlot = [None]*3
-		self.wl = WorldLoader('new.world')	
-		self.background = TerrainLayer("0_0.map")
-		self.currentMap = "0_0.map"
+		self.wl = WorldLoader(WORLD_NAME)	
+		self.background = TerrainLayer("tygra/0_0.map")
+		self.currentMap = "tygra/0_0.map"
 		for i in range(0,3):
 			self.hudSlot[i] = Actor(IMG_SLOT,-1)
 			self.hudSlot[i].setPos(50,120+i*120)
@@ -162,26 +162,26 @@ class GameState(State):
 
 	def nextMap(self, direction, pos):
 		# print "moving to: " + direction + " via: " + str(pos)
-		mmap = ""
+		mmap = None
 
 		if direction == 'up':
 			mmap = self.wl.north[self.currentMap]
 			# position player at bottom minus almost half a tile
-			if mmap is not 'none':
+			if mmap is not None:
 				self.player.setPos(pos[0], HEIGHT-17)
 		elif direction == 'down':
 			mmap = self.wl.south[self.currentMap]
-			if mmap is not 'none':
+			if mmap is not None:
 				self.player.setPos(pos[0], 17)
 		elif direction == 'right':
 			mmap = self.wl.east[self.currentMap]
-			if mmap is not 'none':
+			if mmap is not None:
 				self.player.setPos(64+17, pos[1]) # just not touching the hud
 		elif direction == 'left':
 			mmap = self.wl.west[self.currentMap]
-			if mmap is not 'none':
+			if mmap is not None:
 				self.player.setPos(WIDTH-(64+17), pos[1])
-		if not mmap == 'none':
+		if not mmap == None:
 			self.currentMap = mmap
 			self.background = TerrainLayer(mmap)
 
