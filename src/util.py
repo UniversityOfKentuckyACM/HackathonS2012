@@ -36,11 +36,11 @@ def loadImage(imageFile, colorKey=None):
 	except pygame.error, message:
 		print "Error loading image:", imageFile
 		raise SystemExit, message
-	
+
 	# convert for speed and grab rect for collisions
 	image = image.convert_alpha()
 	rect = image.get_rect()
-	
+
 	# handle colorKey
 	if colorKey is not None:
 		if colorKey is -1:
@@ -48,7 +48,7 @@ def loadImage(imageFile, colorKey=None):
 		image.set_colorkey(colorKey, RLEACCEL)
 
 	return image, rect
-	
+
 def loadSound(name):
 	path = os.path.join(GAME_SOUNDS, name)
 	path = filepath(path)
@@ -56,7 +56,7 @@ def loadSound(name):
 		def play(self): pass
     	if not pygame.mixer or not pygame.mixer.get_init():
         	return NoneSound()
-    
+
     	try:
         	sound = pygame.mixer.Sound(path)
     	except pygame.error, message:

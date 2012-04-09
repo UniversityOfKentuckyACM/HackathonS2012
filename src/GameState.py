@@ -53,12 +53,14 @@ class GameState(State):
 
 		self.updateHudHealth()
 
+		'''TODO: FIX MUSIC
 		pygame.mixer.init()
 		filename = "worldAmbient.ogg"
 		path = os.path.join(util.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
+		'''
 
 	def __del__(self):
 		# transition to another state
@@ -121,16 +123,10 @@ class GameState(State):
 			# exit game
 			if event.key == K_ESCAPE:
 				sys.exit(1)
-			if event.key == MOVEMENT_KEYS[0]:
-				self.player.move(0)
-			if event.key == MOVEMENT_KEYS[1]:
-				self.player.move(1)
-			if event.key == MOVEMENT_KEYS[2]:
-				self.player.move(2)
-			if event.key == MOVEMENT_KEYS[3]:
-				self.player.move(3)
-            		if event.key == MAGIC_ATTACK_KEY:
-                		self.player.useMagic()
+			if event.key in MOVEMENT_KEYS:
+				self.player.move(event.key)
+			if event.key == MAGIC_ATTACK_KEY:
+				self.player.useMagic()
 			# testing
 			if event.key == K_DOWN:
 				self.health -= 1
@@ -140,14 +136,8 @@ class GameState(State):
 				self.updateHudHealth()
 
 		elif event.type == pygame.KEYUP:
-			if event.key == MOVEMENT_KEYS[0]:
-				self.player.unMove(0)
-			if event.key == MOVEMENT_KEYS[1]:
-				self.player.unMove(1)
-			if event.key == MOVEMENT_KEYS[2]:
-				self.player.unMove(2)
-			if event.key == MOVEMENT_KEYS[3]:
-				self.player.unMove(3)
+			if event.key in MOVEMENT_KEYS:
+				self.player.unMove(event.key)
 
 		elif event.type == pygame.MOUSEBUTTONDOWN:
             		if pygame.mouse.get_pressed()[0]:

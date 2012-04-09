@@ -33,15 +33,19 @@ class TitleState(State):
 		TitleState.titleGroup.add(self.titleScreen)
 		TitleState.btnStartGroup.add(self.btnStart)
 
+		'''TODO: FIX MUSIC
 		pygame.mixer.init()
 		pygame.mixer.music.load("../data/sounds/godspeed.mid")
 		pygame.mixer.music.play()
+		'''
 
 	def __del__(self):
 		# transition to another state
 		TitleState.titleGroup.empty()
 		TitleState.btnStartGroup.empty()
+		'''TODO: FIX MUSIC
 		pygame.mixer.music.stop()
+		'''
 
 	def update(self):
 		self.tick += 1
@@ -51,10 +55,8 @@ class TitleState(State):
 		else:
 			TitleState.btnStartGroup.add(self.btnStart)
 
-		if self.tick > self.tickInterval:
-			self.tick = 0
-			if self.ready:
-				self.main.changeState(GameState(self.main))
+		if self.ready:
+			self.main.changeState(GameState(self.main))
 
 
 		TitleState.btnStartGroup.update()
@@ -69,12 +71,12 @@ class TitleState(State):
 				if event.key == K_ESCAPE:
 					sys.exit(0)
 				if event.key == K_RETURN:
-					#pygame.mixer.music.stop()
-					#pygame.mixer.music.load("../data/sounds/HeroOh.ogg")
-					#pygame.mixer.music.play()
+					'''TODO: FIX MUSIC
+					pygame.mixer.music.stop()
+					pygame.mixer.music.load("../data/sounds/HeroOh.ogg")
+					pygame.mixer.music.play()
+					'''
 					self.ready = True
-					self.tick = 0
-					self.tickInterval = 120
 
 	def draw(self):
 		# draw group stuff
