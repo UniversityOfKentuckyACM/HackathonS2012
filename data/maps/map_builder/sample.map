@@ -1,0 +1,60 @@
+9 - 9
+[RSC]
+% snowyMountain.png
+D dungeonDoor.png
+Y treeDyingTop.png
+y treeDyingBottom.png
+R rubbleDead.png
+G grassDead.png
+[AT]
+%%%%%%..%%%%%%%%%%%%%%%%%%%%
+%%%%%%..%%%%%%%%%%%%%%%%%%%%
+%%%%%%..%%%%%%%%%%%%D%%%%%%%
+........%%%%%%.....RR..%%%%%
+........%%%%%%.....R.R.%%%%%
+%%%%%%..%%%%%%.........%%%%%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.................%
+%%%%%%..%%.....Y...........%
+%.......%%.....y...........%
+%.......%%.................%
+%...%%%%%%.................%
+%...%%%%%%.................%
+%..........................%
+%..........................%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+[UNDER]
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+[ENTITY]
+door dungeonDoor.png 640 64 d1_0_1.map

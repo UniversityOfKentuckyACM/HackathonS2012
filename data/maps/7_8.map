@@ -1,0 +1,62 @@
+7-8
+[RSC]
+G grassDead.png
+# wall.png
+@ impassableRockDead.png
+% snowyMountain.png
+Y treeDyingTop.png
+T treeDyingBottom.png
+
+[AT]
+@%%.............%%@@@@@@####
+@%%..............%%@@@@@@###
+@%%.........Y....%%@@@@@@@##
+@%%.........T.....%%@@@@@@##
+@%%...............%%@@@@@@##
+@%%...............%@@@@@@@##
+@%%...............%@@@@@@@##
+@%......%%%%%.....%@@@@@@@@#
+@%.....%%%%%%%.....%@@@@@@@#
+@%.....%%%%%%%%....%%@@@@@@#
+@%%....%%%%%%%%....%@@@@@@@@
+@%%%...%%%%%%%......%@@@@@@@
+@%%%...%%%%%....%%...%@@@@@@
+@%%%%..%%%%.....%%...%%%@@@@
+@%%%%..%%%.....%%%....%%%%%%
+@%%%%...%.....%%%%....%%%%%%
+%%%%%%.......%%%%.....%%%%%%
+%%%%%%%.....%%%%%..%..%%%%%%
+%%%%%%%....%%%%%%%%%..%%%%%%
+%%%%%%....%%%%%%%%%%....%%%%
+%%%%%....%%%%%%%%%%%........
+%%%%%...%%%%%%%%%%%%%.......
+%%%%%..%%%%%%%%%%%%%%%%%%%%%
+%%%%%..%%%%%%%%%%%%%%%%%%%%%
+
+[UNDER]
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+
+[ENTITY]

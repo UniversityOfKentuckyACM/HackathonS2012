@@ -1,0 +1,83 @@
+6_6.map
+[RSC]
+G grassDead.png
+M mountain.png
+# water.png
+S waterToxicWithStone.png
+W wall.png
+T treeDyingBottom.png
+Q treeDyingTop.png
+R rubbleDead.png
+[AT]
+MM.......WWWWWWWWWWWWWWWWWWW
+MM..........................
+MM..........................
+MM.......W..................
+MM.......W..................
+MM.......W..................
+MM.Q.Q.Q.W..................
+MM.T.T.T.W..................
+MM######.###################
+MM######.###################
+MM######.###################
+MM######.###################
+MM######.###################
+MM######.###################
+MM######..............######
+MM###################.######
+MM###################.######
+MM###################.######
+MM###################.######
+MM###################.######
+MM.................MM.......
+MM.................MM.......
+MMMMMMMMMMMMMMMMMMMMM...MMMM
+MMMMMMMMMMMMMMMMMMMMM...MMMM
+[UNDER]
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGRGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGRGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MM######S###################
+MM######S###################
+MM######S###################
+MM######S###################
+MM######S###################
+MM######S###################
+MM######SSSSSSSSSSSSSS######
+MM###################S######
+MM###################S######
+MM###################S######
+MM###################S######
+MM###################S######
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMMMMMMMMMMMMMMMMMMMMGGGMMMM
+MMMMMMMMMMMMMMMMMMMMMGGGMMMM
+[ENTITY]
+Skel skeletonDown.png 480 128
+Skel2 skeletonDown.png 576 128
+Skel3 skeletonDown.png 672 128
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

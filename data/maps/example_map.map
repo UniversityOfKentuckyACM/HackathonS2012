@@ -1,0 +1,72 @@
+' this is an example of a comment
+' extra carriage returns are meaningless, do not do anything with them BETWEEN blocks
+' The . is a special char that means "nothing here"
+Grassy Plain  ' this is the map name, it may or may not be displayed to the player
+
+[RSC]         ' Master for resource stuff...
+
+# wall.png    ' No commas here, ACSCII char then a space and the resource name to load
+G ground.png
+
+[AT]          ' stuff in the character layer.  The character cannot move through anything that isn't a '.'
+
+' do not add any comments inside the following block of characters!
+
+#####..#####################
+#..........................#
+#..........................#
+#..##################..##..#
+#..##################..##..#
+#..........##..##..##..##..#
+#..........##..##..##..##..#
+#####..##..##..##..##..##..#
+#####..##..##..##..##..##..#
+#####..##..##..##..##..##..#
+...##..##..##..............#
+...##..##..##..............#
+#..##..##..#################
+#..##..##...................
+#..##..##...................
+#..##..#####################
+#..##......................#
+#..##......................#
+#..######################..#
+#..##..........##......##..#
+#..##..........##......##..#
+#..##......##......##......#
+#..##......##......##......#
+#..##......#################
+
+[UNDER]
+
+' do not add any comments inside the following block of characters!
+
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
+
+[ENTITY]
+
+type type.png 0 0 ' basic format, 0 0 is the x and y pixel location of the entity
+skeleton skeleton.png 0 0

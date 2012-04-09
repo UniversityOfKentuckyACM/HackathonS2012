@@ -1,0 +1,20 @@
+#$ 9 - 9 ;;
+#@
+fbox % 0 0 6 3 ;;
+fbox % 8 0 27 3 ;;
+fbox % 8 3 14 6 ;;
+fbox % 23 3 27 6 ;;
+fbox % 0 5 6 16 ;;
+vline % 0 5 24 ;;
+vline % 27 0 24 ;;
+vline2 % 8 0 20 ;;
+hline2 % 4 18 10 ;;
+hline2 % 0 22 28 ;;
+door 20 2 d1_0_1.map ;;
+dead tree 15 15 ;;
+point R 20 3 ;;
+point R 19 3 ;;
+point R 19 4 ;;
+point R 21 4 ;;
+#B
+all G ;;

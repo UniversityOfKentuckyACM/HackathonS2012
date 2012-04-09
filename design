@@ -1,0 +1,85 @@
+Master design doc
+
+HLD:
+
+Fantasy
+Top-down (2d, overhead)
+no inventory
+
+3 slots
+melee weapon
+ranged weapon
+magic slot
+shield/optional slot?
+
+A-La zelda style, top level world with seperate sub dugeons
+
+Major Questions:
+	Overall Art design
+	Story
+
+Level Design:
+	32 x 24 tiles
+		4 L,R reserved for HUD = 28 x 24
+
+	File Format -> tile prop
+
+	World:
+		World -> 20 x 20 (N,S,E,W)
+
+		{
+		size x
+		size y
+		
+		<name> <n exit> <s exit> <ER...> //eg <G11> <_> <G12> <ER....>
+		}
+	Map:
+		
+		name
+		<size> // 28,24
+		// RSC is "Resources"
+		// Enter in the form <character> image
+		[RSC]
+		. -> No
+
+		{any ascii} #, ..../fname
+
+		[AT]
+		// Defines what is at the level of the player.
+		// defines impassable/passable.
+		// "." means passable.
+		.
+		.
+		.
+		D,D,D,D,D
+		[UNDER] // Defines the background terrain.
+		.
+		.
+		.
+		[ENTITY] // Defines items/monsters that should be added.
+		entity-name image-file xpos,ypos
+		.
+		.
+		.
+		}
+|==========|==========|==========|==========|==========|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+|==========|==========|==========|==========|==========|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+|==========|==========|==========|==========|==========|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+|==========|==========|==========|==========|==========|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+|==========|==========|==========|==========|==========|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+|==========|==========|==========|==========|==========|

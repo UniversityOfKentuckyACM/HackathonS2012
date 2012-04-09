@@ -1,0 +1,19 @@
+Add sound files for the game here.
+
+Songs:
+
+	Splash Screen ("Made At UK ACM Hackathon"): splashScreen.mp3
+	Title Menu Song: godspeed.mid
+	Ambient (Background) World Music: worldAmbient.mp3
+	Ambient (Background) Dungeon Music: dungeonAmbient.mp3
+	On Fighting Boss: bossFight.mp3
+	On Defeating Final Boss: sanctuary.mid
+	Credits Song: gameover.mid
+
+Sounds:
+
+	On Player Enters Dungeon: dungeonEntered.mp3
+	On Player Death: playerDiedSound.mp3
+	On Player Gets New Or Better Item: success.mp3
+
+

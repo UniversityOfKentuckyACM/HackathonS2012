@@ -1,0 +1,59 @@
+7_6.map
+[RSC]
+G grassDead.png
+M rocks.png
+# water.png
+S waterToxicWithStone.png
+W wall.png
+R rubbleDead.png
+[AT]
+WWWWWWW##############MMMMMMM
+.......##############MMMMMMM
+.......##############.....MM
+.......##############.....MM
+.......##############.....MM
+..........................MM
+.......##############.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+#####################.....MM
+####MMMMMM###########.....MM
+###MMMMMMMM##########.....MM
+##MMMM###MMM#########.....MM
+#MMMM#####MMM########.....MM
+MMMM#################.....MM
+MMMM#################.....MM
+MMMM......................MM
+MMMM......................MM
+[UNDER]
+GGGGGGG##############MMMMMMM
+GGGGGGG##############MMMMMMM
+GRGGGGG##############GGGGGGG
+GGGGGGG##############GGGGGGG
+GGGGRGG##############GGGGGGG
+GGGGGGGSSSSSSSSSSSSSSGGGGGGG
+GGGGGGG##############GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+#####################GGGGGGG
+MMMM#################GGGGGGG
+MMMM#################GGGGGGG
+MMMMGGGGGGGGGGGGGGGGGGGGGGGG
+MMMMGGGGGGGGGGGGGGGGGGGGGGGG
+[ENTITY]
