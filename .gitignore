@@ -1,0 +1,4 @@
+# Ignore .pyc files
+*.pyc
+*.swp
+.DS_Store

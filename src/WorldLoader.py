@@ -12,7 +12,8 @@ class WorldLoader:
 			line = line.rstrip()
 			if line is not "":
 				args = line.split()
-				self.north[args[0]] = args[1] 
-				self.south[args[0]] = args[2] 
-				self.east[args[0]] = args[3] 
-				self.west[args[0]] = args[4] 
+				key, N, S, E, W = line.split()
+				self.north[key] = N
+				self.south[key] = S
+				self.east[key] = E
+				self.west[key] = W
