@@ -37,7 +37,8 @@ class WorldLoader:
 				print "Error: unknown ID in %s -> \"%s\"" % (worldname, val)
 				sys.exit(1)
 
-		# Now now load map files
+		# Now now load map files. These really should be named i_j.map but are
+		# actually j_i.map, presumably because of x_y.
 		for i in range(self.rows):
 			for j in range(self.cols):
 				key = "%s_%s.map" % (i, j)
@@ -46,20 +47,20 @@ class WorldLoader:
 
 				# now determine filenames for N/S/E/W maps. This replaces the
 				# old .world files
-				if i > 0:
-					self.north[key] = os.path.join(self.dir, "%d_%d.map" % (i-1, j))
+				if j > 0:
+					self.north[key] = os.path.join(self.dir, "%d_%d.map" % (i, j-1))
 				else:
 					self.north[key] = None
-				if i < self.rows - 1:
-					self.south[key] = os.path.join(self.dir, "%d_%d.map" % (i+1, j))
+				if j < self.rows - 1:
+					self.south[key] = os.path.join(self.dir, "%d_%d.map" % (i, j+1))
 				else:
 					self.south[key] = None
 				if j > 0:
-					self.west[key] = os.path.join(self.dir, "%d_%d.map" % (i, j-1))
+					self.west[key] = os.path.join(self.dir, "%d_%d.map" % (i-1, j))
 				else:
 					self.west[key] = None
-				if j < self.cols - 1:
-					self.east[key] = os.path.join(self.dir, "%d_%d.map" % (i, j+1))
+				if i < self.cols - 1:
+					self.east[key] = os.path.join(self.dir, "%d_%d.map" % (i+1, j))
 				else:
 					self.east[key] = None
 				

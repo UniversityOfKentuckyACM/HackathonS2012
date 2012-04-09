@@ -171,7 +171,8 @@ class GameState(State):
 			mmap = self.wl.west[self.currentMap]
 			if mmap is not None:
 				self.player.setPos(WIDTH-(64+17), pos[1])
-		if not mmap == None:
+
+		if mmap is not None:
 			self.currentMap = mmap
 			self.background = TerrainLayer(mmap)
 
