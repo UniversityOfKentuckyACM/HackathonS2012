@@ -55,7 +55,7 @@ class WorldLoader:
 					self.south[key] = os.path.join(self.dir, "%d_%d.map" % (i, j+1))
 				else:
 					self.south[key] = None
-				if j > 0:
+				if i > 0:
 					self.west[key] = os.path.join(self.dir, "%d_%d.map" % (i-1, j))
 				else:
 					self.west[key] = None
