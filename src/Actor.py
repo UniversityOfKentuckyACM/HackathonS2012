@@ -64,7 +64,7 @@ class Actor(pygame.sprite.Sprite):
 	def getVel(self):
 		return self.vel
 
-	def update(self):
+	def update(self, clock):
 		"""
 			Move rect+image (vel[0], vel[1]) pixels
 		"""

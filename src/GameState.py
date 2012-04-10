@@ -70,12 +70,12 @@ class GameState(State):
 		self.player = Player(self)
 		GameState.playerGroup.add(self.player)
 
-	def update(self):
+	def update(self, clock):
 		self.checkCollisions()
-		State.update(self);
+		State.update(self, clock);
 
-		GameState.guiGroup.update()
-		GameState.playerGroup.update()
+		GameState.guiGroup.update(clock)
+		GameState.playerGroup.update(clock)
 
 	def updateHudHealth(self):
 		if self.health < 1 or self.health > 20:

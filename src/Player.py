@@ -152,8 +152,8 @@ class Player(Actor.Actor):
         	self.magi.add(self.gameState.playerGroup)
 
 
-	def update(self):
-		super(Player,self).update()
+	def update(self, clock):
+		super(Player,self).update(clock)
 
 		# Check to see if we have touched edge of the screen
 		if self.rect.left < TILEX * 2:

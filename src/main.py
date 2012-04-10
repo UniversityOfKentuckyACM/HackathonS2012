@@ -53,7 +53,7 @@ class Game():
 				self.state = self.nextState
 				self.nextState = None
 			else:
-				self.state.update()
+				self.state.update(self.clock)
 
 if __name__ == '__main__':
 	g = Game()
