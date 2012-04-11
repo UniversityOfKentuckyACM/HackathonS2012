@@ -71,11 +71,9 @@ class GameState(State):
 		GameState.playerGroup.add(self.player)
 
 	def update(self):
-		self.checkCollisions()
 		State.update(self);
-
 		GameState.guiGroup.update()
-		GameState.playerGroup.update()
+		GameState.playerGroup.update(self.background.atGroup)
 
 	def updateHudHealth(self):
 		if self.health < 1 or self.health > 20:
@@ -123,8 +121,8 @@ class GameState(State):
 			# exit game
 			if event.key == K_ESCAPE:
 				sys.exit(1)
-			if event.key in MOVEMENT_KEYS:
-				self.player.move(event.key)
+			if event.key in KEY2DIRECTION:
+				self.player.move(KEY2DIRECTION[event.key])
 			if event.key == MAGIC_ATTACK_KEY:
 				self.player.useMagic()
 			# testing
@@ -136,8 +134,8 @@ class GameState(State):
 				self.updateHudHealth()
 
 		elif event.type == pygame.KEYUP:
-			if event.key in MOVEMENT_KEYS:
-				self.player.unMove(event.key)
+			if event.key in KEY2DIRECTION:
+				self.player.unMove(KEY2DIRECTION[event.key])
 
 		elif event.type == pygame.MOUSEBUTTONDOWN:
             		if pygame.mouse.get_pressed()[0]:
@@ -145,10 +143,6 @@ class GameState(State):
             		if pygame.mouse.get_pressed()[2]:
                 		self.player.shootBow()
 
-	def checkCollisions(self):
-		# Check for atLayer collisions
-		for hit in pygame.sprite.spritecollide(self.player, self.background.atGroup, 0):
-			self.player.collideWall(hit)
 
 	def nextMap(self, direction, pos):
 		# print "moving to: " + direction + " via: " + str(pos)

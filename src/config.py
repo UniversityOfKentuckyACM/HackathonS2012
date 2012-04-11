@@ -15,7 +15,8 @@ GAME_TITLE = "Hackathon!"
 MOVEMENT_KEYS = [K_w, K_s, K_a, K_d]
 
 # Disjoint identifiers for movement
-UP, DOWN, LEFT, RIGHT = MOVEMENT_KEYS
+UP, DOWN, LEFT, RIGHT = range(4)
+KEY2DIRECTION = {K_w: UP, K_s: DOWN, K_a: LEFT, K_d: RIGHT}
 
 MAGIC_ATTACK_KEY = K_SPACE
 

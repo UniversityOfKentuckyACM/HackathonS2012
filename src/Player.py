@@ -19,13 +19,12 @@ class Player(Actor.Actor):
 		# load all images
 		# up, down, left, right
 		self.images = [0] * 4
-		self.images[0], self.rect = util.loadImage(PLAYER_IDLE_UP, -1)
-		self.images[1], self.rect = util.loadImage(PLAYER_IDLE_DOWN, -1)
-		self.images[2], self.rect = util.loadImage(PLAYER_IDLE_LEFT, -1)
-		self.images[3], self.rect = util.loadImage(PLAYER_IDLE_RIGHT, -1)
+		self.images[UP],    self.rect = util.loadImage(PLAYER_IDLE_UP, -1)
+		self.images[DOWN],  self.rect = util.loadImage(PLAYER_IDLE_DOWN, -1)
+		self.images[LEFT],  self.rect = util.loadImage(PLAYER_IDLE_LEFT, -1)
+		self.images[RIGHT], self.rect = util.loadImage(PLAYER_IDLE_RIGHT, -1)
 
-		# 0 = up, 1 = down, 2 = left, 3 = right
-		self.direction = 0
+		self.direction = UP
 
 		# assign image and position
 		self.setImage(self.images[self.direction])
@@ -42,6 +41,8 @@ class Player(Actor.Actor):
 		self.swordDown.image,self.swordDown.rect  = util.loadImage("swordSwingDown.png")
 
 		self.gameState = gameState
+
+		self.keys = {UP: False, DOWN: False, LEFT: False, RIGHT: False}
 
 	# Orient player with mouse
 	def orient(self, mousePos):
@@ -66,6 +67,7 @@ class Player(Actor.Actor):
 		self.direction = newDir
 		self.image = self.images[self.direction]
 
+	'''LEGACY CODE, not used currently
 	def collideWall(self, wall):
 		# collision on the top of charcter
 		if self.rect.top < wall.rect.bottom and self.rect.bottom > wall.rect.top and self.vel[1]<0:
@@ -73,46 +75,32 @@ class Player(Actor.Actor):
 			self.rect.top = wall.rect.bottom
 		# collision on the bottom of character
 		if self.rect.bottom > wall.rect.top and self.rect.top < wall.rect.bottom and self.vel[1]>0:
-                        self.vel -= Vector2(0,0)
-                        self.rect.bottom = wall.rect.top
-                # collision on the right side of character
-                if self.rect.right > wall.rect.left and self.rect.left < wall.rect.right and self.vel[0]>0:
-                        self.vel -= Vector2(0,0)
-                        self.rect.right = wall.rect.left
-                # collision on the left side of character
-                if self.rect.left < wall.rect.right and self.rect.right > wall.rect.left and self.vel[0]<0:
-                        self.vel -= Vector2(0,0)
-                        self.rect.left = wall.rect.right
+			self.vel -= Vector2(0,0)
+			self.rect.bottom = wall.rect.top
+		# collision on the right side of character
+		if self.rect.right > wall.rect.left and self.rect.left < wall.rect.right and self.vel[0]>0:
+			self.vel -= Vector2(0,0)
+			self.rect.right = wall.rect.left
+		# collision on the left side of character
+		if self.rect.left < wall.rect.right and self.rect.right > wall.rect.left and self.vel[0]<0:
+			self.vel -= Vector2(0,0)
+			self.rect.left = wall.rect.right
+	'''
 
 	def move(self, m):
 		'''
 			Press a key and add to our velocity vector
 		'''
-		directions = {
-			UP:    Vector2( 0, -1),
-			DOWN:  Vector2( 0,  1),
-			LEFT:  Vector2(-1,  0),
-			RIGHT: Vector2( 1,  0)
-		}
-
-		direction = directions.get(m, None)
-		if direction is not None:
-			self.vel += direction * PLAYER_SPEED
+		if m in self.keys:
+			self.keys[m] = True
 
 	def unMove(self, m):
 		'''
 			Once a key is released, remove that from velocity vector.
 		'''
-		directions = {
-			UP:    Vector2( 0, -1),
-			DOWN:  Vector2( 0,  1),
-			LEFT:  Vector2(-1,  0),
-			RIGHT: Vector2( 1,  0)
-		}
 
-		direction = directions.get(m, None)
-		if direction is not None:
-			self.vel -= direction * PLAYER_SPEED
+		if m in self.keys:
+			self.keys[m] = False
 
 	# TODO: FIX THIS
 	def swingSword(self):
@@ -152,8 +140,19 @@ class Player(Actor.Actor):
         	self.magi.add(self.gameState.playerGroup)
 
 
-	def update(self):
-		super(Player,self).update()
+	def update(self, environment):
+		self.vel.x = self.vel.y = 0
+		if self.keys[UP]:
+			self.vel.y -= 1
+		elif self.keys[DOWN]:
+			self.vel.y += 1
+		if self.keys[LEFT]:
+			self.vel.x -= 1
+		elif self.keys[RIGHT]:
+			self.vel.x += 1
+		self.vel = self.vel.normalized() * PLAYER_SPEED
+
+		super(Player,self).update(environment)
 
 		# Check to see if we have touched edge of the screen
 		if self.rect.left < TILEX * 2:
@@ -164,3 +163,5 @@ class Player(Actor.Actor):
 			self.gameState.nextMap("up", self.getPos())
 		elif self.rect.bottom > HEIGHT:
 			self.gameState.nextMap("down", self.getPos())
+
+
