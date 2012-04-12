@@ -64,33 +64,9 @@ class Actor(pygame.sprite.Sprite):
 	def getVel(self):
 		return self.vel
 
-	def nextpos(self):
-		"""
-			Generate next rectangles from current velocity
-		"""
-		return self.rect.move(self.vel.x, 0), self.rect.move(0, self.vel.y)
-
-	def collide(self, env):
-		"""
-			Return whether the object collides in x or y direction
-		"""
-		rectangles = [x.rect for x in env]
-		xpos, ypos = self.nextpos()
-		xcollide = xpos.collidelist(rectangles) != -1
-		ycollide = ypos.collidelist(rectangles) != -1
-		return xcollide, ycollide
-
-	def update(self, *args):
+	def update(self, clock):
 		"""
 			Move rect+image (vel[0], vel[1]) pixels
 		"""
-
-		if len(args):
-			environment = args[0]
-			collidex, collidey = self.collide(environment)
-			if collidex:
-				self.vel.x = 0
-			if collidey:
-				self.vel.y = 0
 		self.rect.move_ip(self.vel.x, self.vel.y)
 

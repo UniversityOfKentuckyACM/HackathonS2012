@@ -26,8 +26,8 @@ class Magic(Actor.Actor):
         def magicPath(self):
                 pass
 
-        def update(self, environment):
-            super(Magic,self).update()
+        def update(self, clock):
+            super(Magic,self).update(clock)
 
             #Kill magic object if it reaches the windows bounds.
             if self.rect.top > HEIGHT or self.rect.top < 0 or self.rect.right < 64 or self.rect.right > WIDTH-64:

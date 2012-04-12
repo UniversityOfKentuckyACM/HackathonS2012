@@ -1,6 +1,6 @@
 import math
 import pygame.sprite
-import Actor
+import Collider
 import util
 
 from Vector2 import Vector2
@@ -8,7 +8,7 @@ from Magic import Magic
 
 from config import *
 
-class Player(Actor.Actor):
+class Player(Collider.Collider):
 	'''
 		Player class. images is a list of images for each direction. We may need
 		to alter this to support animation.
@@ -139,20 +139,19 @@ class Player(Actor.Actor):
 
         	self.magi.add(self.gameState.playerGroup)
 
-
-	def update(self, environment):
-		self.vel.x = self.vel.y = 0
+	def update(self, clock, environment):
+		vel = Vector2(0, 0);
 		if self.keys[UP]:
-			self.vel.y -= 1
+			vel.y -= 1
 		elif self.keys[DOWN]:
-			self.vel.y += 1
+			vel.y += 1
 		if self.keys[LEFT]:
-			self.vel.x -= 1
+			vel.x -= 1
 		elif self.keys[RIGHT]:
-			self.vel.x += 1
-		self.vel = self.vel.normalized() * PLAYER_SPEED
+			vel.x += 1
+		self.vel = vel.normalized() * PLAYER_SPEED
 
-		super(Player,self).update(environment)
+		super(Player, self).update(clock, environment)
 
 		# Check to see if we have touched edge of the screen
 		if self.rect.left < TILEX * 2:
@@ -163,5 +162,4 @@ class Player(Actor.Actor):
 			self.gameState.nextMap("up", self.getPos())
 		elif self.rect.bottom > HEIGHT:
 			self.gameState.nextMap("down", self.getPos())
-
 

@@ -47,7 +47,7 @@ class TitleState(State):
 		pygame.mixer.music.stop()
 		'''
 
-	def update(self):
+	def update(self, clock):
 		self.tick += 1
 
 		if self.tick < self.tickInterval/4:
@@ -59,9 +59,9 @@ class TitleState(State):
 			self.main.changeState(GameState(self.main))
 
 
-		TitleState.btnStartGroup.update()
-		TitleState.titleGroup.update()
-		State.update(self)
+		TitleState.btnStartGroup.update(clock)
+		TitleState.titleGroup.update(clock)
+		State.update(self, clock)
 
 	def handleEvent(self):
 		for event in pygame.event.get():

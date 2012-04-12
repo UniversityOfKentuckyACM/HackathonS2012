@@ -9,7 +9,7 @@ class State:
 		# transition to another state
 		pass
 		
-	def update(self):
+	def update(self, clock):
 		# update 
 		self.handleEvent()
 		self.draw()
