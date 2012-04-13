@@ -90,26 +90,6 @@ class Player(Collider.Collider):
 		self.direction = newDir
 		self.image = self.images[self.direction]
 
-	'''LEGACY CODE, not used currently
-	def collideWall(self, wall):
-		# collision on the top of charcter
-		if self.rect.top < wall.rect.bottom and self.rect.bottom > wall.rect.top and self.vel[1]<0:
-			self.vel -= Vector2(0,0)
-			self.rect.top = wall.rect.bottom
-		# collision on the bottom of character
-		if self.rect.bottom > wall.rect.top and self.rect.top < wall.rect.bottom and self.vel[1]>0:
-			self.vel -= Vector2(0,0)
-			self.rect.bottom = wall.rect.top
-		# collision on the right side of character
-		if self.rect.right > wall.rect.left and self.rect.left < wall.rect.right and self.vel[0]>0:
-			self.vel -= Vector2(0,0)
-			self.rect.right = wall.rect.left
-		# collision on the left side of character
-		if self.rect.left < wall.rect.right and self.rect.right > wall.rect.left and self.vel[0]<0:
-			self.vel -= Vector2(0,0)
-			self.rect.left = wall.rect.right
-	'''
-
 	# TODO: FIX THIS
 	def swingSword(self):
 		'''
