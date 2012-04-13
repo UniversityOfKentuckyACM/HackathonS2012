@@ -5,7 +5,7 @@ __all__ = ["HUDManager"]
 import pygame
 from pygame.sprite import Sprite
 
-from config import *
+import config
 import util
 
 # HUD config
@@ -14,8 +14,8 @@ SLOT_SPACING = 120
 SLOT_INDENT_LEFT = 20
 SLOT_INDENT_TOP = 200
 HEART_SPACING = 70
-HEART_INDENT_RIGHT = WIDTH 
-HEART_INDENT_BOTTOM = HEIGHT - 50
+HEART_INDENT_RIGHT = config.WIDTH 
+HEART_INDENT_BOTTOM = config.HEIGHT - 50
 
 # Image names
 IMG_LEFTBAR = "hud_bg.png"
@@ -53,7 +53,7 @@ class HUDManager:
 
 		# Place right bar of HUD along right side of screen
 		self.rightBar = HUDElement(IMG_RIGHTBAR)
-		self.rightBar.placeRight(WIDTH,0)
+		self.rightBar.placeRight(config.WIDTH,0)
 		self.elementGroup.add(self.rightBar)
 
 		# Place NUM_SLOTS weapon slots on the left bar of HUD. These are
