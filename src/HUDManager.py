@@ -91,7 +91,6 @@ class HUDManager:
 				HEART_INDENT_RIGHT, 
 				HEART_INDENT_BOTTOM - (HEART_SPACING * i)
 			)
-			print(self.hearts)
 			self.elementGroup.add(self.hearts[i])
 
 		# Add a half heart if necessary
@@ -102,7 +101,6 @@ class HUDManager:
 				HEART_INDENT_BOTTOM - (HEART_SPACING * (len(self.hearts) - 1))
 			)
 			self.elementGroup.add(self.hearts[-1])
-
 
 	def update(self, clock):
 		pass
