@@ -9,13 +9,10 @@ class Keymap(object):
 				raise Exception("Duplicate action '%s' in keymap" % key)
 			setattr(self, key, kwargs[key])
 			self.codes.add(kwargs[key])
-		self.kwargs = kwargs
+		self.pairs = kwargs
 
 	def __contains__(self, code):
 		return code in self.codes
-
-	def __iter__(self):
-		return iter(self.codes)
 
 	def __str__(self):
 		return "Keymap: " + ", ".join("%s = %s" % (key, value) for (key, value) in self.kwargs.iteritems())
@@ -28,9 +25,9 @@ class Keyboard(object):
 		self.hi = max(self.keys.values())
 		self.pressed = [False] * (self.hi - self.lo)
 		self.keymap = keymap
-		for code in keymap:
+		for key, code in keymap.pairs.iteritems():
 			if not self.iskey(code):
-				raise Exception("Bad keymap: %s (%s) not available on keyboard" % (key, keymap[key]))
+				raise Exception("Bad keymap: %s (%s) not available on keyboard" % (key, code))
 
 	# Is code a valid key number?
 	def iskey(self, code):
