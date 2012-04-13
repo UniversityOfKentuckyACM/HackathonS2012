@@ -93,15 +93,15 @@ class HUDManager:
 			)
 			print(self.hearts)
 			self.elementGroup.add(self.hearts[i])
-		else:
-			# Add a half heart if necessary
-			if health % 2 == 1:
-				self.hearts.append(HUDElement(IMG_HEARTHALF))
-				self.hearts[-1].placeRight(
-					HEART_INDENT_RIGHT,
-					HEART_INDENT_BOTTOM - (HEART_SPACING * (i + 1))
-				)
-				self.elementGroup.add(self.hearts[i + 1])
+
+		# Add a half heart if necessary
+		if health % 2 == 1:
+			self.hearts.append(HUDElement(IMG_HEARTHALF))
+			self.hearts[-1].placeRight(
+				HEART_INDENT_RIGHT,
+				HEART_INDENT_BOTTOM - (HEART_SPACING * (len(self.hearts) - 1))
+			)
+			self.elementGroup.add(self.hearts[-1])
 
 
 	def update(self, clock):
