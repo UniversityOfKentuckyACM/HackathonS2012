@@ -9,9 +9,9 @@ from pygame.locals import *
 
 # Game includes
 from Vector2 import Vector2
-from config import *
 from GameState import GameState
 from TitleState import TitleState
+import config
 
 class Game():
 	def __init__(self):
@@ -19,15 +19,15 @@ class Game():
 		#self.g.loadBackground(BACKGROUND_IMAGE)
 
 		# Initialize our player and set its position to (50,50)
-	#	self.player = self.g.loadPlayer(PLAYER_IMAGE)
+		#	self.player = self.g.loadPlayer(PLAYER_IMAGE)
 		#self.player.setPos(START_X, START_Y)
 
-		if IS_FULLSCREEN:
-			self.screen = pygame.display.set_mode((WIDTH, HEIGHT), FULLSCREEN|DOUBLEBUF)
+		if config.IS_FULLSCREEN:
+			self.screen = pygame.display.set_mode((config.WIDTH, config.HEIGHT), FULLSCREEN|DOUBLEBUF)
 		else:
-			self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-		
-		pygame.display.set_caption(GAME_TITLE)
+			self.screen = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
+
+		pygame.display.set_caption("Tygra")
 
 		# game clock
 		self.clock = pygame.time.Clock()
@@ -38,15 +38,15 @@ class Game():
 
 		# Loop until exit
 		self.gameLoop()
-	
+
 	def changeState(self,state):
 		self.nextState = state
-	
+
 	def gameLoop(self):
 
 		while True:
 			# ensure we're running at a stable FPS
-			self.clock.tick(FRAME_RATE)
+			self.clock.tick(config.FRAME_RATE)
 
 			# State machine
 			if self.nextState != None:
@@ -57,3 +57,4 @@ class Game():
 
 if __name__ == '__main__':
 	g = Game()
+

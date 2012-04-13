@@ -1,7 +1,7 @@
 import os,pygame
 
-from pygame.locals import *
-from config import *
+import pygame.locals as constants
+import config
 
 ## LOAD UTILITIES ##
 data_py = os.path.abspath(os.path.dirname(__file__))
@@ -23,13 +23,13 @@ def load(filename, mode='rb'):
 ## END LOAD UTILITIES ##
 
 def loadMap(mapFile):
-	path = os.path.join(GAME_MAPS, mapFile)
+	path = os.path.join(config.GAME_MAPS, mapFile)
 	path = filepath(path)
 	return load(path)
 
 # Thank you chimp tutorial!
 def loadImage(imageFile, colorKey=None):
-	path = os.path.join(GAME_IMAGES, imageFile)
+	path = os.path.join(config.GAME_IMAGES, imageFile)
 	path = filepath(path)
 	try:
 		image = pygame.image.load(path)
@@ -45,7 +45,7 @@ def loadImage(imageFile, colorKey=None):
 	if colorKey is not None:
 		if colorKey is -1:
 			colorKey = image.get_at((0,0))
-		image.set_colorkey(colorKey, RLEACCEL)
+		image.set_colorkey(colorKey, constants.RLEACCEL)
 
 	return image, rect
 
@@ -54,12 +54,13 @@ def loadSound(name):
 	path = filepath(path)
 	class NoneSound:
 		def play(self): pass
-    	if not pygame.mixer or not pygame.mixer.get_init():
-        	return NoneSound()
+	if not pygame.mixer or not pygame.mixer.get_init():
+		return NoneSound()
 
-    	try:
-        	sound = pygame.mixer.Sound(path)
-    	except pygame.error, message:
-        	print 'Cannot load sound:', path
-        	raise SystemExit, message
-    	return sound
+	try:
+		sound = pygame.mixer.Sound(path)
+	except pygame.error, message:
+		print 'Cannot load sound:', path
+		raise SystemExit, message
+	return sound
+

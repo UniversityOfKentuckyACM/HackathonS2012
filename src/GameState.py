@@ -1,3 +1,5 @@
+__all__ = ["GameState"]
+
 import pygame
 import pygame.gfxdraw
 from pygame.locals import *
@@ -12,7 +14,7 @@ from Player import Player
 from Vector2 import Vector2
 from WorldLoader import WorldLoader
 from TerrainLayer import TerrainLayer
-from config import *
+import config
 
 IMG_HUD = "hud_bg.png"
 IMG_HUD2 = "hud_bg2.png"
@@ -31,24 +33,24 @@ class GameState(State):
 
 	def __init__(self, main):
 		# transition from another state
-		State.__init__(self,main)
+		super(GameState, self).__init__(main)
 		self.loadPlayer()
 		self.hud = Actor(IMG_HUD,-1)
 		self.hud2 = Actor(IMG_HUD2)
-		self.hud.setPos(32,HEIGHT/2)
-		self.hud2.setPos(WIDTH-32,HEIGHT/2)
+		self.hud.setPos(32, config.HEIGHT/2)
+		self.hud2.setPos(config.WIDTH - 32, config.HEIGHT/2)
 		GameState.guiGroup.add(self.hud)
 		GameState.guiGroup.add(self.hud2)
 		self.health = 7
 		self.hudHearts = []
 		self.hudHeartsHalf = Actor(IMG_HEART2,-1)
 		self.hudSlot = [None]*3
-		self.wl = WorldLoader(WORLD_NAME)
+		self.wl = WorldLoader(config.WORLD_NAME)
 		self.background = TerrainLayer("tygra/0_0.map")
 		self.currentMap = "tygra/0_0.map"
-		for i in range(0,3):
-			self.hudSlot[i] = Actor(IMG_SLOT,-1)
-			self.hudSlot[i].setPos(50,120+i*120)
+		for i in range(0, 3):
+			self.hudSlot[i] = Actor(IMG_SLOT, -1)
+			self.hudSlot[i].setPos(50, 120 + i * 120)
 			self.guiGroup.add(self.hudSlot[i])
 
 		self.updateHudHealth()
@@ -64,16 +66,25 @@ class GameState(State):
 
 	def __del__(self):
 		# transition to another state
-		pass
+		super(GameState, self).__del__()
 
 	def loadPlayer(self):
 		self.player = Player(self)
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
-		State.update(self, clock);
+		from config import keyboard
+		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
+
+		# testing
+		if keyboard.downup("HEALTHDOWN"):
+			self.health -= 1
+			self.updateHudHealth()
+		if keyboard.downup("HEALTHUP"):
+			self.health += 1
+			self.updateHudHealth()
 
 	def updateHudHealth(self):
 		if self.health < 1 or self.health > 20:
@@ -91,32 +102,33 @@ class GameState(State):
 				GameState.guiGroup.remove(self.hudHearts.pop())
 
 			for i in range(0,full):
-				self.hudHearts[i].setPos(WIDTH-25,HEIGHT-50-i*60)
+				self.hudHearts[i].setPos(config.WIDTH - 25, config.HEIGHT - 50 - i * 60)
 
 		if halve == 1:
 			GameState.guiGroup.add(self.hudHeartsHalf)
-			self.hudHeartsHalf.setPos(WIDTH-25, HEIGHT-50-full*60)
+			self.hudHeartsHalf.setPos(config.WIDTH - 25, config.HEIGHT - 50 - full * 60)
 		else:
 			self.hudHeartsHalf.kill()
 
 	def handleEvent(self):
+		super(GameState, self).handleEvent()
+
 		# handle mouse
 		mousePos = Vector2(pygame.mouse.get_pos())
 		self.player.orient(mousePos)
-
-		# For each event that occurs this frame
 		for event in pygame.event.get():
-			# If user exits the window
-			if event.type == QUIT:
-				sys.exit(0)
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				if pygame.mouse.get_pressed()[0]:
+					self.player.swingSword()
+				if pygame.mouse.get_pressed()[2]:
+					self.player.shootBow()
 
-			# monitor keyboard
-			self.handleKey(event)
-
+	# LEGACY CODE: Not called anymore, need to do something with health, hud stuff
 	def handleKey(self, event):
 		'''
 			Handle input from user keyboard
 		'''
+
 		if event.type == pygame.KEYDOWN:
 			# exit game
 			if event.key == K_ESCAPE:
@@ -138,10 +150,10 @@ class GameState(State):
 				self.player.unMove(KEY2DIRECTION[event.key])
 
 		elif event.type == pygame.MOUSEBUTTONDOWN:
-            		if pygame.mouse.get_pressed()[0]:
-                		self.player.swingSword()
-            		if pygame.mouse.get_pressed()[2]:
-                		self.player.shootBow()
+			if pygame.mouse.get_pressed()[0]:
+				self.player.swingSword()
+			if pygame.mouse.get_pressed()[2]:
+				self.player.shootBow()
 
 
 	def nextMap(self, direction, pos):
@@ -152,7 +164,7 @@ class GameState(State):
 			mmap = self.wl.north[self.currentMap]
 			# position player at bottom minus almost half a tile
 			if mmap is not None:
-				self.player.setPos(pos[0], HEIGHT-17)
+				self.player.setPos(pos[0], config.HEIGHT - 17)
 		elif direction == 'down':
 			mmap = self.wl.south[self.currentMap]
 			if mmap is not None:
@@ -160,18 +172,18 @@ class GameState(State):
 		elif direction == 'right':
 			mmap = self.wl.east[self.currentMap]
 			if mmap is not None:
-				self.player.setPos(64+17, pos[1]) # just not touching the hud
+				self.player.setPos(64 + 17, pos[1]) # just not touching the hud
 		elif direction == 'left':
 			mmap = self.wl.west[self.currentMap]
 			if mmap is not None:
-				self.player.setPos(WIDTH-(64+17), pos[1])
+				self.player.setPos(config.WIDTH - (64 + 17), pos[1])
 
 		if mmap is not None:
 			self.currentMap = mmap
 			self.background = TerrainLayer(mmap)
 
       		# Added for debugging purposes. Remove when not needed
-        	print "MAP: ",mmap
+        	print "MAP: ", mmap
 
 	def draw(self):
 		#draw background
@@ -185,4 +197,5 @@ class GameState(State):
 		GameState.guiGroup.draw(self.main.screen)
 
 		# flip screen
-		State.draw(self)
+		super(GameState, self).draw()
+

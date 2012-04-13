@@ -1,3 +1,5 @@
+__all__ = ["TitleState"]
+
 from State import State
 import pygame
 import pygame.gfxdraw
@@ -6,7 +8,7 @@ import sys
 from Actor import Actor
 from pygame.locals import *
 from GameState import GameState
-from config import WIDTH, HEIGHT
+import config
 
 IMG_TITLE_SCREEN = "screen_title.png"
 IMG_LABEL_START = "label_start.png"
@@ -18,17 +20,16 @@ class TitleState(State):
 
 	def __init__(self, main):
 		# transition from another state
-		State.__init__(self,main)
+		super(TitleState, self).__init__(main)
 		self.titleScreen = Actor(IMG_TITLE_SCREEN)
 		self.btnStart = Actor(IMG_LABEL_START)
 		self.btnStart2 = Actor(IMG_LABEL_START2)
 
-		self.btnStart.setPos(WIDTH/2,HEIGHT-300)
-		self.btnStart2.setPos(WIDTH/2,HEIGHT-300)
+		self.btnStart.setPos(config.WIDTH/2, config.HEIGHT - 300)
+		self.btnStart2.setPos(config.WIDTH/2, config.HEIGHT - 300)
 
 		self.tick = 0
 		self.tickInterval = 60
-		self.ready = False
 
 		TitleState.titleGroup.add(self.titleScreen)
 		TitleState.btnStartGroup.add(self.btnStart)
@@ -46,8 +47,10 @@ class TitleState(State):
 		'''TODO: FIX MUSIC
 		pygame.mixer.music.stop()
 		'''
+		super(TitleState, self).__del__()
 
 	def update(self, clock):
+		super(TitleState, self).update(clock)
 		self.tick += 1
 
 		if self.tick < self.tickInterval/4:
@@ -55,31 +58,23 @@ class TitleState(State):
 		else:
 			TitleState.btnStartGroup.add(self.btnStart)
 
-		if self.ready:
+		if config.keyboard.downup("START"):
 			self.main.changeState(GameState(self.main))
-
 
 		TitleState.btnStartGroup.update(clock)
 		TitleState.titleGroup.update(clock)
-		State.update(self, clock)
 
 	def handleEvent(self):
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				sys.exit(0)
-			if event.type == pygame.KEYDOWN:
-				if event.key == K_ESCAPE:
-					sys.exit(0)
-				if event.key == K_RETURN:
-					'''TODO: FIX MUSIC
-					pygame.mixer.music.stop()
-					pygame.mixer.music.load("../data/sounds/HeroOh.ogg")
-					pygame.mixer.music.play()
-					'''
-					self.ready = True
+		super(TitleState, self).handleEvent()
+		'''TODO: FIX MUSIC
+		pygame.mixer.music.stop()
+		pygame.mixer.music.load("../data/sounds/HeroOh.ogg")
+		pygame.mixer.music.play()
+		'''
 
 	def draw(self):
 		# draw group stuff
 		TitleState.titleGroup.draw(self.main.screen)
 		TitleState.btnStartGroup.draw(self.main.screen)
-		State.draw(self)
+		super(TitleState, self).draw()
+

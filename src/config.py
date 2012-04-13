@@ -1,47 +1,40 @@
 # Configuration variables to be used by rest of game
-import os
-from pygame.locals import *
 
+import pygame.locals as constants
+
+# Player actions mapped to key values
+keymap = {
+	"UP":			constants.K_w,
+	"DOWN":			constants.K_s,
+	"LEFT":			constants.K_a,
+	"RIGHT":		constants.K_d,
+	"MAGIC":		constants.K_k,
+	"START":		constants.K_RETURN,
+
+	# Testing only
+	"HEALTHUP":		constants.K_UP,
+	"HEALTHDOWN":	constants.K_DOWN,
+}
+
+# Global keyboard object
+from Keyboard import Keyboard
+keyboard = Keyboard(keymap)
+
+# Video configuration
 WIDTH = 1024
 HEIGHT = 768
 IS_FULLSCREEN = False
 FRAME_RATE = 60
+
+# Standard size of sprite tiles
 TILEX = 32
 TILEY = 32
-
-GAME_TITLE = "Tygra"
 
 # Points us to the name of the world file
 WORLD_NAME = "tygra.world"
 
-# up, down, left right
-MOVEMENT_KEYS = [K_w, K_s, K_a, K_d]
-
-# Disjoint identifiers for movement
-UP, DOWN, LEFT, RIGHT = range(4)
-KEY2DIRECTION = {K_w: UP, K_s: DOWN, K_a: LEFT, K_d: RIGHT}
-
-MAGIC_ATTACK_KEY = K_SPACE
-
+# Data Directories
 GAME_IMAGES = "images"
 GAME_SOUNDS = "sounds"
 GAME_MAPS = "maps"
 
-START_X = WIDTH / 2
-START_Y = HEIGHT / 2
-
-PLAYER_SPEED = 8
-MAGIC_SPEED = (3,-3)
-
-# Player up, down, left, right sprites
-PLAYER_IDLE_IMAGES = ["characterUp1.png", "characterDown1.png", "characterLeft1.png", "characterRight1.png"]
-PLAYER_IDLE_UP = PLAYER_IDLE_IMAGES[0]
-PLAYER_IDLE_DOWN = PLAYER_IDLE_IMAGES[1]
-PLAYER_IDLE_LEFT = PLAYER_IDLE_IMAGES[2]
-PLAYER_IDLE_RIGHT = PLAYER_IDLE_IMAGES[3]
-
-#Weapons sprites
-MAGIC_ATTACK_IMAGE = "fireballRight.png"
-
-START_MENU = "START"
-PLAY = "PLAY"

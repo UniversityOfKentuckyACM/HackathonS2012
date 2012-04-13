@@ -1,9 +1,10 @@
+__all__ = ["Actor"]
 
 import pygame
 import os
 import util
 from Vector2 import Vector2
-from config import *
+import config
 
 class Actor(pygame.sprite.Sprite):
 	"""
@@ -12,7 +13,7 @@ class Actor(pygame.sprite.Sprite):
 		www.pygame.org/docs/tut/chimp/ChimpLineByLine.html
 	"""
 
-	def __init__(self, imageFile = None, colorKey = None):
+	def __init__(self, imageFile=None, colorKey=None):
 		"""
 			If supplied with an image load it. Also initialize velocity to (0,0).
 		"""
