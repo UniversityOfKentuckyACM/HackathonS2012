@@ -11,17 +11,11 @@ import math
 from State import State
 from Actor import Actor
 from Player import Player
-from Vector2 import Vector2
 from WorldLoader import WorldLoader
 from TerrainLayer import TerrainLayer
+from HUDManager import HUDManager
+from Vector2 import Vector2
 import config
-
-IMG_HUD = "hud_bg.png"
-IMG_HUD2 = "hud_bg2.png"
-IMG_SLOT = "slot_bg.png"
-IMG_HEART = "hud_health.png"
-IMG_HEART2 = "hud_health_half.png"
-
 class GameState(State):
 	'''
 		State for game playing mode.
@@ -35,25 +29,11 @@ class GameState(State):
 		# transition from another state
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
-		self.hud = Actor(IMG_HUD,-1)
-		self.hud2 = Actor(IMG_HUD2)
-		self.hud.setPos(32, config.HEIGHT/2)
-		self.hud2.setPos(config.WIDTH - 32, config.HEIGHT/2)
-		GameState.guiGroup.add(self.hud)
-		GameState.guiGroup.add(self.hud2)
-		self.health = 7
-		self.hudHearts = []
-		self.hudHeartsHalf = Actor(IMG_HEART2,-1)
-		self.hudSlot = [None]*3
 		self.wl = WorldLoader(config.WORLD_NAME)
 		self.background = TerrainLayer("tygra/0_0.map")
 		self.currentMap = "tygra/0_0.map"
-		for i in range(0, 3):
-			self.hudSlot[i] = Actor(IMG_SLOT, -1)
-			self.hudSlot[i].setPos(50, 120 + i * 120)
-			self.guiGroup.add(self.hudSlot[i])
 
-		self.updateHudHealth()
+		self.hud = HUDManager()
 
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
@@ -77,38 +57,6 @@ class GameState(State):
 		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
-
-		# testing
-		if keyboard.downup("HEALTHDOWN"):
-			self.health -= 1
-			self.updateHudHealth()
-		if keyboard.downup("HEALTHUP"):
-			self.health += 1
-			self.updateHudHealth()
-
-	def updateHudHealth(self):
-		if self.health < 1 or self.health > 20:
-			return
-
-		full = self.health/2
-		halve = self.health%2
-
-		if len(self.hudHearts) != full:
-			while len(self.hudHearts) < full:
-				self.hudHearts.append(Actor(IMG_HEART,-1))
-				GameState.guiGroup.add(self.hudHearts[-1])
-
-			while len(self.hudHearts) > full:
-				GameState.guiGroup.remove(self.hudHearts.pop())
-
-			for i in range(0,full):
-				self.hudHearts[i].setPos(config.WIDTH - 25, config.HEIGHT - 50 - i * 60)
-
-		if halve == 1:
-			GameState.guiGroup.add(self.hudHeartsHalf)
-			self.hudHeartsHalf.setPos(config.WIDTH - 25, config.HEIGHT - 50 - full * 60)
-		else:
-			self.hudHeartsHalf.kill()
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
@@ -138,12 +86,12 @@ class GameState(State):
 			if event.key == MAGIC_ATTACK_KEY:
 				self.player.useMagic()
 			# testing
-			if event.key == K_DOWN:
-				self.health -= 1
-				self.updateHudHealth()
-			if event.key == K_UP:
-				self.health += 1
-				self.updateHudHealth()
+			#if event.key == K_DOWN:
+				#self.health -= 1
+				#self.updateHudHealth()
+			#if event.key == K_UP:
+				#self.health += 1
+				#Dself.updateHudHealth()
 
 		elif event.type == pygame.KEYUP:
 			if event.key in KEY2DIRECTION:
@@ -194,7 +142,7 @@ class GameState(State):
 		GameState.playerGroup.draw(self.main.screen)
 
 		# draw gui
-		GameState.guiGroup.draw(self.main.screen)
+		self.hud.draw(self.main.screen)
 
 		# flip screen
 		super(GameState, self).draw()
