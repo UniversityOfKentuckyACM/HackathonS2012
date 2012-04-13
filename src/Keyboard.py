@@ -15,7 +15,7 @@ class Keymap(object):
 		return code in self.codes
 
 	def __str__(self):
-		return "Keymap: " + ", ".join("%s = %s" % (key, value) for (key, value) in self.kwargs.iteritems())
+		return "Keymap: " + ", ".join("%s = %s" % (key, value) for (key, value) in self.pairs.iteritems())
 
 class Keyboard(object):
 	def __init__(self, keymap):
