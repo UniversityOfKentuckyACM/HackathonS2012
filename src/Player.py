@@ -148,22 +148,22 @@ class Player(Collider.Collider):
 			self.magi.add(self.gameState.playerGroup)
 
 	def update(self, clock, environment):
-		from config import keyboard
+		from config import keyboard, keymap
 
 		vel = Vector2(0, 0);
-		if keyboard.down("UP"):
+		if keyboard.down(keymap.UP):
 			vel.y -= 1
-		elif keyboard.down("DOWN"):
+		elif keyboard.down(keymap.DOWN):
 			vel.y += 1
-		if keyboard.down("LEFT"):
+		if keyboard.down(keymap.LEFT):
 			vel.x -= 1
-		elif keyboard.down("RIGHT"):
+		elif keyboard.down(keymap.RIGHT):
 			vel.x += 1
 		self.vel = vel.normalized() * PLAYER_SPEED
 
 		super(Player, self).update(clock, environment, False)
 
-		if keyboard.downup("MAGIC"):
+		if keyboard.downup(keymap.MAGIC):
 			self.useMagic()
 
 		# Check to see if we have touched edge of the screen

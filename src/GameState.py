@@ -53,7 +53,6 @@ class GameState(State):
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
-		from config import keyboard
 		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
@@ -70,39 +69,6 @@ class GameState(State):
 					self.player.swingSword()
 				if pygame.mouse.get_pressed()[2]:
 					self.player.shootBow()
-
-	# LEGACY CODE: Not called anymore, need to do something with health, hud stuff
-	def handleKey(self, event):
-		'''
-			Handle input from user keyboard
-		'''
-
-		if event.type == pygame.KEYDOWN:
-			# exit game
-			if event.key == K_ESCAPE:
-				sys.exit(1)
-			if event.key in KEY2DIRECTION:
-				self.player.move(KEY2DIRECTION[event.key])
-			if event.key == MAGIC_ATTACK_KEY:
-				self.player.useMagic()
-			# testing
-			#if event.key == K_DOWN:
-				#self.health -= 1
-				#self.updateHudHealth()
-			#if event.key == K_UP:
-				#self.health += 1
-				#Dself.updateHudHealth()
-
-		elif event.type == pygame.KEYUP:
-			if event.key in KEY2DIRECTION:
-				self.player.unMove(KEY2DIRECTION[event.key])
-
-		elif event.type == pygame.MOUSEBUTTONDOWN:
-			if pygame.mouse.get_pressed()[0]:
-				self.player.swingSword()
-			if pygame.mouse.get_pressed()[2]:
-				self.player.shootBow()
-
 
 	def nextMap(self, direction, pos):
 		# print "moving to: " + direction + " via: " + str(pos)

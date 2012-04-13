@@ -50,6 +50,7 @@ class TitleState(State):
 		super(TitleState, self).__del__()
 
 	def update(self, clock):
+		from config import keyboard, keymap
 		super(TitleState, self).update(clock)
 		self.tick += 1
 
@@ -58,7 +59,7 @@ class TitleState(State):
 		else:
 			TitleState.btnStartGroup.add(self.btnStart)
 
-		if config.keyboard.downup("START"):
+		if keyboard.downup(keymap.START):
 			self.main.changeState(GameState(self.main))
 
 		TitleState.btnStartGroup.update(clock)

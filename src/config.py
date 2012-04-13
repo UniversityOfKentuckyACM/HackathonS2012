@@ -2,22 +2,21 @@
 
 import pygame.locals as constants
 
-# Player actions mapped to key values
-keymap = {
-	"UP":			constants.K_w,
-	"DOWN":			constants.K_s,
-	"LEFT":			constants.K_a,
-	"RIGHT":		constants.K_d,
-	"MAGIC":		constants.K_k,
-	"START":		constants.K_RETURN,
-
-	# Testing only
-	"HEALTHUP":		constants.K_UP,
-	"HEALTHDOWN":	constants.K_DOWN,
-}
-
 # Global keyboard object
-from Keyboard import Keyboard
+# use like `if keyboard.down(keymap.UP): ...`
+from Keyboard import Keyboard, Keymap
+
+# Map player actions to key codes
+keymap = Keymap(
+	UP    = constants.K_w,
+	DOWN  = constants.K_s,
+	LEFT  = constants.K_a,
+	RIGHT = constants.K_d,
+	MAGIC = constants.K_k,
+	START = constants.K_RETURN
+)
+
+# Validate keymap and build keyboard object
 keyboard = Keyboard(keymap)
 
 # Video configuration
