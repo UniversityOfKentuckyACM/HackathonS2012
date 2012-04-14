@@ -32,16 +32,13 @@ START_Y = config.HEIGHT / 2
 # Speed
 PLAYER_SPEED = 8
 
-#Current Map player operates
-PLAYER_MAP_POS
-
 class Player(Collider.Collider):
 	'''
 		Player class. images is a list of images for each direction. We may need
 		to alter this to support animation.
 	'''
-
-	def __init__(self,gameState):
+	
+	def __init__(self, gameState, mapStart=[0,0]):
 		super(Player,self).__init__()
 
 		# load all images
@@ -57,6 +54,9 @@ class Player(Collider.Collider):
 		# assign image and position
 		self.setImage(self.images[self.direction])
 		self.setPos(START_X, START_Y)
+
+		# [column, row] of which map screen player is in
+		self.mapPos = mapStart
 
 		# load sword
 		self.swordLeft = pygame.sprite.Sprite()
