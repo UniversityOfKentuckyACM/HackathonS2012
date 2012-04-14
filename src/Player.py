@@ -37,8 +37,8 @@ class Player(Collider.Collider):
 		Player class. images is a list of images for each direction. We may need
 		to alter this to support animation.
 	'''
-
-	def __init__(self,gameState):
+	
+	def __init__(self, gameState):
 		super(Player,self).__init__()
 
 		# load all images
