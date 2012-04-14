@@ -18,6 +18,7 @@ keymap = Keymap(
 	DDOWN = constants.K_DOWN,
 	DLEFT = constants.K_LEFT,
 	DRIGHT = constants.K_RIGHT,
+	MAP = constants.K_m,
 )
 
 
