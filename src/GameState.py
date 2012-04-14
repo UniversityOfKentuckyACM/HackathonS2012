@@ -92,9 +92,8 @@ class GameState(State):
 		if mmap is not None:
 			self.currentMap = mmap
 			self.background = self.wl.getMap(mmap)
-
-      		# Added for debugging purposes. Remove when not needed
-        	print "MAP: ", mmap
+      			# Added for debugging purposes. Remove when not needed
+        		print "MAP: ", mmap
 
 
 
