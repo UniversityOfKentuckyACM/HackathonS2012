@@ -39,7 +39,7 @@ class GameState(State):
 
 		self.hud = HUDManager()
 
-		''' npc_one = NPC(self, 30, 30, "Skeleton")'''
+		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
