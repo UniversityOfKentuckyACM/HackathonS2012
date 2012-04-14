@@ -62,6 +62,8 @@ class GameState(State):
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
 
+		self.worldMap.update(clock)
+
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
 		self.sudoNext()
@@ -89,8 +91,11 @@ class GameState(State):
 			mmap = self.wl.east[self.currentMap]
 		if mmap is not None:
 			self.currentMap = mmap
-			self.background = TerrainLayer(mmap)
-        		print "MAP: ", mmap
+			self.background = self.wl.getMap(mmap)
+
+      		# Added for debugging purposes. Remove when not needed
+        	print "MAP: ", mmap
+
 
 
 	def nextMap(self, direction, pos):
