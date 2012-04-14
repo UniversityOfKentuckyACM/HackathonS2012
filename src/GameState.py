@@ -84,7 +84,9 @@ class GameState(State):
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
 		for i in range(0, len(GameState.enemyGroup.sprites())):
-			GameState.enemyGroup.sprites()[i].movetowards(self.player.rect.left, self.player.rect.top)
+			x = (self.player.rect.left + self.player.rect.right) / 2
+			y = (self.player.rect.top + self.player.rect.bottom) / 2
+			GameState.enemyGroup.sprites()[i].movetowards(x, y)
 		GameState.enemyGroup.update(clock, [x.rect for x in self.background.atGroup])
 		self.hud.update(clock, self.player)
 
