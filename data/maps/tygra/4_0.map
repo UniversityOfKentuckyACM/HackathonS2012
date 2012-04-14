@@ -1,13 +1,14 @@
 The (4,0) position in the world map
 [RSC]
-G ground.png
+M mountain.png
+G grass.png
 O water.png
 S sand.png
 s sand.png 'Change back to halfsand.png when such file exists
 [AT]
-.......OOOOOOOOOOOOOOOOOOOOO
-.......OOOOOOOOOOOOOOOOOOOOO
-.......OOOOOOOOOOOOOOOOOOOOO
+MMMMMMMOOOOOOOOOOOOOOOOOOOOO
+MMMMMMMOOOOOOOOOOOOOOOOOOOOO
+MMMMMMMOOOOOOOOOOOOOOOOOOOOO
 .......OOOOOOOOOOOOOOOOOOOOO
 .......OOOOOOOOOOOOOOOOOOOOO
 .......OOOOOOOOOOOOOOOOOOOOO

@@ -3,7 +3,7 @@ Tile4_4
 M rockyMountain.png
 G grass.png
 [AT]
-.....MMMM...................
+............................
 .....MMMMMMM................
 ...MMMMMMMMMMMM.............
 ..MMMMMMMMMMMMMMMMM.........
@@ -28,7 +28,7 @@ G grass.png
 .MMMMMMMMMMMMMMMMMMMMMMMMMMM
 .MMMMMMMMMMMMMMMMMMMMMMMMMMM
 [UNDER]
-GGGGG....GGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGG.......GGGGGGGGGGGGGGGG
 GGG............GGGGGGGGGGGGG
 GG.................GGGGGGGGG
