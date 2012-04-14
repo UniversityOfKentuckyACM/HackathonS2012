@@ -34,7 +34,7 @@ class GameState(State):
 		startMap = os.path.join("tygra", "0_0.map") 
 		self.background = TerrainLayer(startMap)
 		self.currentMap = startMap
-
+		
 		self.hud = HUDManager()
 
 		'''TODO: FIX MUSIC
@@ -52,7 +52,9 @@ class GameState(State):
 
 	def loadPlayer(self):
 		self.player = Player(self)
+		self.player.PLAYER_MAP_POS = (0, 0)
 		GameState.playerGroup.add(self.player)
+
 
 	def update(self, clock):
 		super(GameState, self).update(clock);

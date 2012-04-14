@@ -32,6 +32,9 @@ START_Y = config.HEIGHT / 2
 # Speed
 PLAYER_SPEED = 8
 
+#Current Map player operates
+PLAYER_MAP_POS
+
 class Player(Collider.Collider):
 	'''
 		Player class. images is a list of images for each direction. We may need
