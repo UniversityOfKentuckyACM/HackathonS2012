@@ -21,7 +21,9 @@ class WorldLoader:
 	DIR = "DIR"
 
 	def __init__(self, worldname):
+		# A dictionary of tuple -> mapname
 		self.world = {}
+
 		self.north = {}
 		self.south = {}
 		self.east = {}
@@ -50,7 +52,7 @@ class WorldLoader:
 				# key should now be "dir/i_j.map"
 
 				# Load map into world dict
-				#self.world[key] = TerrainLayer(key)
+				self.world[(i,j)] = key
 
 				# now determine filenames for N/S/E/W maps. This replaces the
 				# old .world files

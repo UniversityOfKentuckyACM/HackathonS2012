@@ -2,6 +2,7 @@
 import pygame
 
 from Map import Map
+from TerrainLayer import TerrainLayer
 
 import config
 
@@ -26,7 +27,10 @@ class WorldMap(object):
 		self.pos = ((config.WIDTH / 2) - (self.dimX / 2), 
 			(config.HEIGHT / 2) - (self.dimY / 2))
 
+		# Create surface to draw on
 		self.surface = pygame.Surface((self.dimX, self.dimY))
+
+		# TEMP
 		for i in range(self.dimX):
 			for j in range(self.dimY):
 				self.surface.set_at((i,j), (200, 10, 200, 0))
@@ -34,11 +38,15 @@ class WorldMap(object):
 		# Iterate through each map and generate image
 		for i in range(self.worldDimRows):
 			for j in range(self.worldDimCols):
-				pass
+				self.genImage(i,j)
 		
 	def genImage(self, row, col):
-		pass
-	
+		# Load current map
+		layer = TerrainLayer(self.wl.world[(row,col)])
+
+		# Grab a list of tiles in current map
+		tiles = layer.imagemap
+
 	def draw(self, screen):
 		screen.blit(self.surface, self.pos)
 		
