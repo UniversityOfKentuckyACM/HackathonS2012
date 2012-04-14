@@ -13,6 +13,7 @@ from State import State
 from Actor import Actor
 from Player import Player
 from WorldLoader import WorldLoader
+from WorldMap import WorldMap
 from HUDManager import HUDManager
 from Vector2 import Vector2
 import config
@@ -29,22 +30,24 @@ class GameState(State):
 		# transition from another state
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
+
+		# Initialize World
 		self.wl = WorldLoader(config.WORLD_NAME)
 		startMap = os.path.join("tygra", "0_0.map") 
 		self.background = self.wl.getMap(startMap)
 		self.currentMap = startMap
 		
+		# Initialize World Map
+		self.worldMap = WorldMap(self.wl)
+		
+		# Initialize HUD
 		self.hud = HUDManager()
-
-		'''TODO: FIX MUSIC
-		pygame.mixer.init()
-		filename = "worldAmbient.ogg"
+		'''TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
 		path = os.path.join(util.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
 		'''
-
 	def __del__(self):
 		# transition to another state
 		super(GameState, self).__del__()
@@ -115,6 +118,9 @@ class GameState(State):
 
 		# draw gui
 		self.hud.draw(self.main.screen)
+
+		# draw world map
+		self.worldMap.draw(self.main.screen)
 
 		# flip screen
 		super(GameState, self).draw()
