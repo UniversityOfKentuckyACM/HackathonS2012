@@ -6,6 +6,9 @@ from Map import Map
 import config
 
 class WorldMap(object):
+	
+	# How many pixels (in each dimension) we use to represent each tile
+	PIXELS_PER_TILE = 2
 
 	def __init__(self, loader):
 		# Grab WorldLoader
@@ -16,8 +19,8 @@ class WorldMap(object):
 		self.worldDimCols = self.wl.cols
 
 		# Determine dimensions of image
-		self.dimX = self.wl.cols * Map.NUM_COLS
-		self.dimY = self.wl.rows * Map.NUM_ROWS
+		self.dimX = self.wl.cols * Map.NUM_COLS * WorldMap.PIXELS_PER_TILE
+		self.dimY = self.wl.rows * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
 
 		self.surface = pygame.Surface((self.dimX, self.dimY))
 		for i in range(self.dimX):
