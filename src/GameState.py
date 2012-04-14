@@ -33,12 +33,15 @@ class GameState(State):
 
 		# Initialize World
 		self.wl = WorldLoader(config.WORLD_NAME)
-		startMap = os.path.join("tygra", "0_0.map")
-		self.environment = self.wl.getMap(startMap)
-		self.currentMap = startMap
 
 		# Initialize World Map
-		#self.worldMap = WorldMap(self.wl)
+		self.worldMap = WorldMap(self.wl)
+		startMap = os.path.join("tygra", "0_0.map")
+
+		# Starting map
+		self.environment = self.wl.getMap(startMap, self.worldMap)
+		self.currentMap = startMap
+
 
 		# Initialize HUD
 		self.hud = HUDManager()
@@ -62,7 +65,7 @@ class GameState(State):
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.environment.atGroup])
 
-		#self.worldMap.update(clock)
+		self.worldMap.update(clock)
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
@@ -92,7 +95,7 @@ class GameState(State):
 		if mmap is not None:
 			self.currentMap = mmap
 			print "MAP: ", mmap
-			self.environment = self.wl.getMap(mmap)
+			self.environment = self.wl.getMap(mmap, self.worldMap)
 
 			# Added for debugging purposes. Remove when not needed
 			print "MAP: ", mmap
@@ -128,7 +131,7 @@ class GameState(State):
 
 		if mmap is not None:
 			self.currentMap = mmap
-			self.environment = self.wl.getMap(mmap)
+			self.environment = self.wl.getMap(mmap, self.worldMap)
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
@@ -148,7 +151,7 @@ class GameState(State):
 		self.environment.drawForeground(self.main.screen)
 
 		# draw world map
-		#self.worldMap.draw(self.main.screen)
+		self.worldMap.draw(self.main.screen)
 
 		# flip screen
 		super(GameState, self).draw()
