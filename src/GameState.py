@@ -7,6 +7,7 @@ from pygame.locals import *
 import util
 import sys
 import math
+import os
 
 from State import State
 from Actor import Actor
@@ -30,8 +31,9 @@ class GameState(State):
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
 		self.wl = WorldLoader(config.WORLD_NAME)
-		self.background = TerrainLayer("tygra/0_0.map")
-		self.currentMap = "tygra/0_0.map"
+		startMap = os.path.join("tygra", "0_0.map") 
+		self.background = TerrainLayer(startMap)
+		self.currentMap = startMap
 
 		self.hud = HUDManager()
 
