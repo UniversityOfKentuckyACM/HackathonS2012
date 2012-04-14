@@ -13,7 +13,7 @@ UP, DOWN, LEFT, RIGHT = range(4)
 NPC_SPEED = 2
 STATE_STOPPED = 0
 STATE_MOVING = 1
-NPC_SPEED = 8
+NPC_SPEED = 2
 
 class NPC(Collider.Collider):
 	def __init__(self, gameState, x, y, npcname):
@@ -36,19 +36,20 @@ class NPC(Collider.Collider):
 		self.state = STATE_MOVING
 		
 	def update(self, clock, environment):
-		# print self.rect.center[0], self.rect.center[1]
-		if self.sqDistanceFrom(self.destination) < 4:
-			self.vel.x = 0
-			self.vel.y = 0
-			self.state = STATE_STOPPED
-		else:
-			vel = Vector2(0, 0)
-			vel.x = self.destination[0] - self.rect.center[0]
-			vel.y = self.destination[1] - self.rect.center[1]
-			
-			self.vel = vel.normalized() * NPC_SPEED
-		#self.setImage(self.images[self.direction])
+		print "inner",self.rect.center[0], self.rect.center[1]
 		
 		if self.state == STATE_MOVING:
+			if self.sqDistanceFrom(self.destination) < 4:
+				self.vel.x = 0
+				self.vel.y = 0
+				self.state = STATE_STOPPED
+			else:
+				vel = Vector2(0, 0)
+				vel.x = self.destination[0] - self.rect.center[0]
+				vel.y = self.destination[1] - self.rect.center[1]
+				
+				self.vel = vel.normalized() * NPC_SPEED
+				#self.setImage(self.images[self.direction])
+				
 			assert(self.destination != None)
 			super(NPC, self).update(clock, environment, False)

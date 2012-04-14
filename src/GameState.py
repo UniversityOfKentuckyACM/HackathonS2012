@@ -54,8 +54,10 @@ class GameState(State):
 		GameState.terrainLayer = self.background
 		self.currentMap = startMap
 		self.hud = HUDManager()
-
-		GameState.enemyGroup.add(Enemy(self, 300, 300, "Skeleton"))
+		
+		npc_one = Enemy(self, 300, 300, "skeleton")
+		GameState.enemyGroup.add(npc_one)
+		npc_one.movetowards(500,400)
 
 		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
@@ -77,11 +79,10 @@ class GameState(State):
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
-		super(GameState, self).update(clock);
+		super(GameState, self).update(clock)
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
-		GameState.enemyGroup.sprites()[0].movetowards(1000, 1000, clock, [x.rect for x in self.background.atGroup])
-		print GameState.enemyGroup.sprites()[0].rect.left
+		GameState.enemyGroup.update(clock, [x.rect for x in self.background.atGroup])
 		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
