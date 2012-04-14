@@ -134,6 +134,10 @@ class Player(Collider.Collider):
 	def update(self, clock, environment):
 		from config import keyboard, keymap
 
+		#am i alive?
+		if (self.health <= 0):
+			self.alive = False
+
 		vel = Vector2(0, 0);
 		if keyboard.down(keymap.UP):
 			vel.y -= 1

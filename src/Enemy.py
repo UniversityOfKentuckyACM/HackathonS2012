@@ -19,6 +19,9 @@ class Enemy(NPC.NPC):
 		#check if dead
 		if (self.health <= 0):
 			self.alive = False
+			return
+
+
 			
 		super(Enemy, self).update(clock, environment)
 
