@@ -14,6 +14,9 @@ class WorldMap(object):
 	def __init__(self, loader):
 		# Grab WorldLoader
 		self.wl = loader
+
+		# Don't display by default
+		self.show = False
 		
 		# Dimensions of worlds
 		self.worldDimRows = self.wl.rows
@@ -81,24 +84,26 @@ class WorldMap(object):
 				# y coordinate to draw
 				y = starty + (j * WorldMap.PIXELS_PER_TILE)
 
+				# map is x,y so swap j and i
 				tile = '.'
 				if map.atLayer[j][i] != '.':
 					tile = map.atLayer[j][i]
 				else:
 					tile = map.belowLayer[j][i]
 
+				# Draw each tile as a 2x2 block
 				if tile != '.':
 					self.surface.set_at((x,y), tileVals[tile])
 					self.surface.set_at((x+1,y), tileVals[tile])
 					self.surface.set_at((x,y+1), tileVals[tile])
 					self.surface.set_at((x+1,y+1), tileVals[tile])
-					'''
-					for currX in range(WorldMap.PIXELS_PER_TILE):
-						for currY in range(WorldMap.PIXELS_PER_TILE):
-							self.surface.set_at((startx+currX, starty+currY), tileVals[tile])
-					'''
 
+	def update(self, clock):
+		from config import keyboard, keymap
+		if keyboard.downup(keymap.MAP):
+			self.show = not self.show
 
 	def draw(self, screen):
-		screen.blit(self.surface, self.pos)
-		
+		if self.show:
+			screen.blit(self.surface, self.pos)
+

@@ -14,6 +14,7 @@ keymap = Keymap(
 	RIGHT = constants.K_d,
 	MAGIC = constants.K_k,
 	START = constants.K_RETURN,
+	MAP = constants.K_m,
 )
 
 # Validate keymap and build keyboard object
