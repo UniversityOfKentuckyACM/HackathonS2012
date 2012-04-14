@@ -9,6 +9,11 @@ import sys
 import math
 import os
 
+import NPC
+from Enemy import Enemy
+
+from random import *
+
 from State import State
 from Actor import Actor
 from Player import Player
@@ -17,26 +22,45 @@ from TerrainLayer import TerrainLayer
 from HUDManager import HUDManager
 from Vector2 import Vector2
 import config
+
 class GameState(State):
 	'''
 		State for game playing mode.
 	'''
-
 	bgGroup = pygame.sprite.OrderedUpdates()
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
+	enemyGroup = pygame.sprite.RenderPlain()
+	player = None
+	terrainLayer = None
+	cachedPathGraph = None
+	curPathGraph = None
+
+	def getPlayer():
+		assert(player != None)
+		return GameState.player
+	
+	@staticmethod
+	def getCurrentAtMap():
+		assert(GameState.terrainLayer != None)
+		return GameState.terrainLayer.getMap().getAtLayer()
 
 	def __init__(self, main):
 		# transition from another state
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
+        
 		self.wl = WorldLoader(config.WORLD_NAME)
 		startMap = os.path.join("tygra", "0_0.map") 
 		self.background = TerrainLayer(startMap)
+		GameState.terrainLayer = self.background
 		self.currentMap = startMap
-
 		self.hud = HUDManager()
+		
+		GameState.enemyGroup.add(Enemy(self, self.player.rect.left, self.player.rect.top, "skeleton"))
+		GameState.enemyGroup.sprites()[0].movetowards(self.player.rect.left, self.player.rect.top)
 
+		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
 		filename = "worldAmbient.ogg"
@@ -52,12 +76,19 @@ class GameState(State):
 
 	def loadPlayer(self):
 		self.player = Player(self)
+		GameState.player = self.player
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
-		super(GameState, self).update(clock);
+		super(GameState, self).update(clock)
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
+		for i in range(0, len(GameState.enemyGroup.sprites())):
+			x = (self.player.rect.left + self.player.rect.right) / 2
+			y = (self.player.rect.top + self.player.rect.bottom) / 2
+			GameState.enemyGroup.sprites()[i].movetowards(x, y)
+		GameState.enemyGroup.update(clock, [x.rect for x in self.background.atGroup])
+		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
@@ -100,6 +131,10 @@ class GameState(State):
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
+		GameState.enemyGroup.empty()
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
 
 	def draw(self):
 		#draw background
@@ -108,6 +143,8 @@ class GameState(State):
 
 		# draw player
 		GameState.playerGroup.draw(self.main.screen)
+		
+		GameState.enemyGroup.draw(self.main.screen)
 
 		# draw gui
 		self.hud.draw(self.main.screen)

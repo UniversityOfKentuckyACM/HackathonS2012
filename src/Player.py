@@ -67,6 +67,10 @@ class Player(Collider.Collider):
 
 		self.gameState = gameState
 
+		#health
+		self.health = 10
+		self.alive = True
+
 	# Orient player with mouse
 	def orient(self, mousePos):
 		loc = mousePos - Vector2(self.getPos())
@@ -130,6 +134,10 @@ class Player(Collider.Collider):
 	def update(self, clock, environment):
 		from config import keyboard, keymap
 
+		#am i alive?
+		if (self.health <= 0):
+			self.alive = False
+
 		vel = Vector2(0, 0);
 		if keyboard.down(keymap.UP):
 			vel.y -= 1
@@ -155,4 +163,7 @@ class Player(Collider.Collider):
 			self.gameState.nextMap("up", self.getPos())
 		elif self.rect.bottom > config.HEIGHT:
 			self.gameState.nextMap("down", self.getPos())
+
+	def getHealth(self):
+		return self.health
 
