@@ -9,6 +9,8 @@ import sys
 import math
 import os
 
+import NPC
+
 from State import State
 from Actor import Actor
 from Player import Player
@@ -17,26 +19,42 @@ from TerrainLayer import TerrainLayer
 from HUDManager import HUDManager
 from Vector2 import Vector2
 import config
+
 class GameState(State):
 	'''
 		State for game playing mode.
 	'''
-
 	bgGroup = pygame.sprite.OrderedUpdates()
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
+	player = None
+	terrainLayer = None
+	cachedPathGraph = None
+	curPathGraph = None
+
+	@staticmethod
+	def getPlayer():
+		assert(player != None)
+		return GameState.player
+	
+	@staticmethod
+	def getCurrentAtMap():
+		assert(GameState.terrainLayer != None)
+		return GameState.terrainLayer.getMap().getAtLayer()
 
 	def __init__(self, main):
 		# transition from another state
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
+        
 		self.wl = WorldLoader(config.WORLD_NAME)
 		startMap = os.path.join("tygra", "0_0.map") 
 		self.background = TerrainLayer(startMap)
+		GameState.terrainLayer = self.background
 		self.currentMap = startMap
-
 		self.hud = HUDManager()
 
+		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
 		filename = "worldAmbient.ogg"
@@ -52,6 +70,7 @@ class GameState(State):
 
 	def loadPlayer(self):
 		self.player = Player(self)
+		GameState.player = self.player
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
