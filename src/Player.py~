@@ -134,9 +134,6 @@ class Player(Collider.Collider):
 	def damaged(self, damage):
 		health -= damage
 
-	def attack(self, target, damage):
-		target.damaged(damage)
-
 	def update(self, clock, environment):
 		from config import keyboard, keymap
 
