@@ -64,7 +64,7 @@ class GameState(State):
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
-
+		self.sudoNext()
 		# handle mouse
 		mousePos = Vector2(pygame.mouse.get_pos())
 		self.player.orient(mousePos)
@@ -74,6 +74,24 @@ class GameState(State):
 					self.player.swingSword()
 				if pygame.mouse.get_pressed()[2]:
 					self.player.shootBow()
+
+	def sudoNext(self):
+	#Used for debugging,
+		from config import keyboard, keymap
+		mmap = None
+		if keyboard.downup(keymap.DUP):
+			mmap = self.wl.north[self.currentMap]
+		elif keyboard.downup(keymap.DDOWN):
+			mmap = self.wl.south[self.currentMap]
+		elif keyboard.downup(keymap.DLEFT):
+			mmap = self.wl.west[self.currentMap]
+		elif keyboard.downup(keymap.DRIGHT):
+			mmap = self.wl.east[self.currentMap]
+		if mmap is not None:
+			self.currentMap = mmap
+			self.background = TerrainLayer(mmap)
+        		print "MAP: ", mmap
+
 
 	def nextMap(self, direction, pos):
 		# print "moving to: " + direction + " via: " + str(pos)
@@ -117,7 +135,7 @@ class GameState(State):
 		GameState.playerGroup.draw(self.main.screen)
 
 		# draw gui
-		self.hud.draw(self.main.screen)
+	#	self.hud.draw(self.main.screen)
 
 		# draw world map
 		self.worldMap.draw(self.main.screen)

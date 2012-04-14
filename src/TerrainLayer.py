@@ -40,16 +40,22 @@ class TerrainLayer(pygame.Surface):
 				if thismap.belowLayer[y][x] != '.':
 					self.blit(self.imagemap[thismap.belowLayer[y][x]], ((x + 2) * config.TILEX, y * config.TILEY))
 
-		#load sprites for at layer
+		#load sprites for at layer and over layer
 		self.atGroup = pygame.sprite.RenderPlain()
+		self.overGroup = pygame.sprite.RenderPlain()
 		for y in range(config.HEIGHT / config.TILEY):
 			for x in range(config.WIDTH / config.TILEX - 4):
 				if thismap.atLayer[y][x] != '.':
 					sprite = pygame.sprite.Sprite(self.atGroup)
 					sprite.image, sprite.rect = util.loadImage(thismap.aliases[thismap.atLayer[y][x]])
 					sprite.rect.topleft = ((x + 2) * config.TILEX, y * config.TILEY)
+				if thismap.overLayer[y][x] != '.':
+					sprite = pygame.sprite.Sprite(self.overGroup)
+					sprite.image, sprite.rect = util.loadImage(thismap.aliases[thismap.overLayer[y][x]])
+					sprite.rect.topleft = ((x + 2) * config.TILEX, y * config.TILEY)
 
 	def drawTerrain(self, screen):
 		screen.blit(self, self.get_rect())
 		self.atGroup.draw(screen)
+		self.overGroup.draw(screen)
 

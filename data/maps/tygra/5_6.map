@@ -1,51 +1,55 @@
 5_6.map
 [RSC]
 G grassDead.png
-M rocks.png
-# ocean.png
+M rockyMountain.png
+W wall.png
+# water.png
+X waterToxic.png
+S waterToxicWithStone.png
+s waterWithStone.png
 [AT]
-MM###################.......
-MM###################.......
-MM###################.......
-MM###################.......
-MM###################.......
-MM###################.......
-MM###################.......
-MM###################.......
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM..########################
-MM..########################
-MM...#######################
-MM...#######################
-MM....######################
-MM..........................
-MM..........................
-MMMMMMMMMMMMMM..............
-MMMMMMMMMMMMMM..............
+MMXXXX.XXXXXXXXXXX.XX.....MM
+MMXXXX....XXXXXXXX.XX.....MM
+MMXXXXXXX.....XXX#.X#.....MM
+MMXXXXXXXX#XX.XX##.X#.....MM
+MMX......##XX.X###.X#.....MM
+MMX.XXX#.###X.X###.##.....MM
+MMX....#.###..####.##.....MM
+MMX....#..##.#####.##.....MM
+MM#XXX.#.###....##.###.###MM
+MMX....#.###.#...#.....###MM
+MMX....#.###.#.###########MM
+MM#..###.#####.###########MM
+MM#..###....##.###########MM
+MM#..######.##.###########MM
+MM#..######.##.###########MM
+MM...####......###########MM
+MM...####......###########MM
+MM...#####################MM
+MM...#####################MM
+MM....####################MM
+MM........................MM
+MM........................MM
+MMMMMMMMMMMMMMM...........MM
+MMMMMMMMMMMMMMM...WWWWWWWWMM
 [UNDER]
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM###################GGGGGGG
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MM##########################
-MMGG########################
-MMGG########################
+MMXXXXSXXXXXXXXXXXSXXGGGGGGG
+MMXXXXSSSSXXXXXXXXSXXGGGGGGG
+MMXXXXXXXSSSSSXXXXsXXGGGGGGG
+MMXXXXXXXX#XXSXXX#SX#GGGGGGG
+MMXSSSSSS##XXSXX##SX#GGGGGGG
+MMXSXXX#S###XSX###sX#GGGGGGG
+MMXSSSS#s###sSX###s##GGGGGGG
+MMXSSSS#ss##s#####s##GGGGGGG
+MM#XXXS#s###ssss##s###s#####
+MMXsSSs#s###s#sss#sssss#####
+MMXSsss#s###s#s#############
+MM#Ss###s#####s#############
+MM#ss###ssss##s#############
+MM#ss######s##s#############
+MM#ss######s##s#############
+MMGGs####ssssss#############
+MMGGs####ssssss#############
 MMGGG#######################
 MMGGG#######################
 MMGGGG######################
