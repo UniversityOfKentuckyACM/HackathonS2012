@@ -17,7 +17,7 @@ class Enemy(NPC.NPC):
 
 	def update(self, clock, environment):
 		#check if dead
-		if (self.health <= 0)
+		if (self.health <= 0):
 			self.alive = False
 
 	def damaged(self, damage):

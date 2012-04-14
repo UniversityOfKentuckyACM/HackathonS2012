@@ -10,6 +10,7 @@ import math
 import os
 
 import NPC
+from Enemy import Enemy
 
 from State import State
 from Actor import Actor
@@ -27,6 +28,7 @@ class GameState(State):
 	bgGroup = pygame.sprite.OrderedUpdates()
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
+	enemyGroup = pygame.sprite.RenderPlain()
 	player = None
 	terrainLayer = None
 	cachedPathGraph = None
@@ -53,6 +55,8 @@ class GameState(State):
 		self.currentMap = startMap
 		self.hud = HUDManager()
 
+		GameState.enemyGroup.add(Enemy(self, 300, 300, "Skeleton"))
+
 		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
@@ -76,7 +80,8 @@ class GameState(State):
 		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
-
+		GameState.enemyGroup.sprites()[0].movetowards(1000, 1000, clock, [x.rect for x in self.background.atGroup])
+		print GameState.enemyGroup.sprites()[0].rect.left
 		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
@@ -128,6 +133,8 @@ class GameState(State):
 
 		# draw player
 		GameState.playerGroup.draw(self.main.screen)
+		
+		GameState.enemyGroup.draw(self.main.screen)
 
 		# draw gui
 		self.hud.draw(self.main.screen)

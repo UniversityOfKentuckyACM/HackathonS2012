@@ -30,19 +30,19 @@ class NPC(Collider.Collider):
 		vel = Vector2(0, 0)
 		if x < self.rect.left:
 			self.direction = LEFT
-			vel.x -= 1
+			vel.x += 1
 		if x > self.rect.right:
 			self.direction = RIGHT
-			vel.x += 1
+			vel.x -= 1
 		if y < self.rect.top:
 			self.direction = UP
-			vel.y -= 1
+			vel.y += 1
 		if y > self.rect.bottom:
 			self.direction = DOWN
-			vel.y += 1
+			vel.y -= 1
 		self.vel = vel.normalized() * NPC_SPEED
 		self.setImage(self.images[self.direction])
-		super(NPC, self).update(clock, environment, false)
+		super(NPC, self).update(clock, environment, False)
 
 """ n = NPC(3, 3, "Skeleton")
 """
