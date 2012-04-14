@@ -1,19 +1,21 @@
 7_6.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # water.png
+s waterWithStone.png
+X waterToxic.png
 S waterToxicWithStone.png
 W wall.png
 R rubbleDead.png
 [AT]
-WWWWWWW##############MMMMMMM
-.......##############MMMMMMM
-.......##############.....MM
-.......##############.....MM
-.......##############.....MM
+WWWWWWWXXXXXXXXXXXXXXMMMMMMM
+.......XXXXXXXXXXXXXXMMMMMMM
+.......XXXXX#XXXXXXXX.....MM
+.......#XXXXX#XXXXX#X.....MM
+.......##XXX###XXXX##.....MM
 ..........................MM
-.......##############.....MM
+..........................MM
 #####################.....MM
 #####################.....MM
 #####################.....MM
@@ -32,13 +34,13 @@ MMMM#################.....MM
 MMMM......................MM
 MMMM......................MM
 [UNDER]
-GGGGGGG##############MMMMMMM
-GGGGGGG##############MMMMMMM
-GRGGGGG##############GGGGGGG
-GGGGGGG##############GGGGGGG
-GGGGRGG##############GGGGGGG
-GGGGGGGSSSSSSSSSSSSSSGGGGGGG
-GGGGGGG##############GGGGGGG
+GGGGGGGXXXXXXXXXXXXXXMMMMMMM
+GGGGGGGXXXXXXXXXXXXXXMMMMMMM
+GRGGGGGXXXXX#XXXXXXXXGGGGGGG
+GGGGGGG#XXXXX#XXXXX#XGGGGGGG
+GGGGRGG##XXX###XXXX##GGGGGGG
+GGGGGGGsssSsssssSSSssGGGGGGG
+GGGGGGGssssssssssSsssGGGGGGG
 #####################GGGGGGG
 #####################GGGGGGG
 #####################GGGGGGG

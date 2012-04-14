@@ -1,50 +1,51 @@
 5_7.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # waterToxic.png
 W wall.png
 R rubbleDead.png
 S waterToxicWithStone.png
 Q treeDyingTop.png
 T treeDyingBottom.png
+F treeDyingForest.png
 [AT]
 MMMQMQMMMMMMMMM...WWWWWWWWWW
 MM.T.T..QQ...Q......W......Q
-MM......QQ.Q.Q......W......Q
-MMQQQQ..QQ.Q.Q......W......Q
-MMTTTT..TT.Q.T......W......Q
-MM.........Q........WWWWW..T
-MM...Q.....QWW..............
-MM...Q.....Q....QQQQQQQQQQ..
-MM...Q.....Q....TTTTTTTTTT..
-MM...T.....T.............TTT
-MM...WWWWWWWWWWWWWWWQ.......
-MM..................T.......
-MM..................QQQQQQQQ
-MM###############...TTTTTTTW
-MM###############...######..
-MM###############...######..
-MM###############...######..
-MM################.#######..
-MM################.#######..
-MM.........Q........######..
-MM.Q.......T...Q....######..
-MM.T...........T............
-MM..........................
+MM......FF.Q.F......W......F
+MMQQQQ..FF.F.F......W......F
+MMTTTT..TT.F.T......W......F
+MM.........F........WWWWW..T
+MM...Q.....FWW..............
+MM...F.....F....QQQQQQQQQQ..
+MM...F.....F....TTTTTTTTTF..
+MM...T.....T.............TQQ
+MM...WWWWWWWWWWWWWWWQ.....TT
+MM..................F.......
+MM..................FQQQQQQQ
+MM###############...TTTTTTTT
+MM###############...######.W
+MM###############...######.W
+MM###############...######.W
+MM################.#######.W
+MM################.#######.W
+MM.........Q........######.W
+MM.Q.......T...Q....######.W
+MM.T...........T...........W
+MM.........................W
 MMWWWWWWWWWWWWWWWWWWWWWWWWWW
 [UNDER]
 MMMMMMMMMMMMMMMGGGGGGGGGGGGW
-MMGGGGGGTTGGGTGGRGGGGGGGGGGT
-MMGGGGGGTTGTGTGGGGGGGGGGGGGT
-MMGGGGGGTTGTGTGGGGGGGGGGGGGT
-MMGGGGGGTTGTGTGGGGGGGGGGGGGT
-MMGGGGGGGGGTGGGGGGGGGGGGGGGG
-MMGGGGGGGGGTGGGGGGGGGGGGGGGG
-MMGGGTGGGGGTGGGGGGGGGGGGGGGG
-MMGGGTGGGGGTGGGGGGGGGGGGGGGG
-MMGGGTGGGGGTGGGGGGGGGGGGGGGG
-MMGGGTGGGGGTGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGRGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG

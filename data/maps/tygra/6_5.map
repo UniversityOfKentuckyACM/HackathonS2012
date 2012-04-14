@@ -1,7 +1,7 @@
 6_5.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # waterToxic.png
 S waterToxicWithStone.png
 [AT]
@@ -28,7 +28,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 ............................
 ............................
 ............................
-............................
+MM.......WWWWWWWWWWWWWWWWWWW
 [UNDER]
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
