@@ -43,6 +43,7 @@ class Map(object):
 
 		f = util.loadMap(mapName)
 		lines = self.clean(f.readlines())
+		f.close()
 		end = len(lines)
 		lineIndex = 0
 		self.mapName = lines[lineIndex]
