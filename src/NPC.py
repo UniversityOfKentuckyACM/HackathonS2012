@@ -13,6 +13,7 @@ UP, DOWN, LEFT, RIGHT = range(4)
 NPC_SPEED = 2
 STATE_STOPPED = 0
 STATE_MOVING = 1
+NPC_SPEED = 8
 
 class NPC(Collider.Collider):
 	def __init__(self, gameState, x, y, npcname):

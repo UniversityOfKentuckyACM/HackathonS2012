@@ -105,7 +105,7 @@ class HUDManager:
 			self.elementGroup.add(self.hearts[-1])
 
 	def update(self, clock, player):
-		self.updateHealth(player.getHealth())
+		self.updateHealth(player.getHealth)
 
 	def draw(self, screen):
 		self.elementGroup.draw(screen)

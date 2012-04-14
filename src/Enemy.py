@@ -10,15 +10,14 @@ import config
 import GameState
 
 class Enemy(NPC.NPC):
-	def __init__(self):
-		super(Enemy, self).__init__()
-
+	def __init__(self, gameState, x, y, name):
+		super(Enemy, self).__init__(gameState, x, y, name)
 		self.alive = True
 		self.health = 4
 
 	def update(self, clock, environment):
 		#check if dead
-		if (self.health <= 0)
+		if (self.health <= 0):
 			self.alive = False
 
 	def damaged(self, damage):
