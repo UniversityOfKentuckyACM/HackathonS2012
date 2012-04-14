@@ -171,3 +171,6 @@ class Player(Collider.Collider):
 		elif self.rect.bottom > config.HEIGHT:
 			self.gameState.nextMap("down", self.getPos())
 
+	def getHealth():
+		return health
+

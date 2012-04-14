@@ -5,6 +5,8 @@ __all__ = ["HUDManager"]
 import pygame
 from pygame.sprite import Sprite
 
+import GameState
+
 import config
 import util
 
@@ -70,7 +72,8 @@ class HUDManager:
 		# Initialize health 'hearts'.
 		self.hearts = []
 
-		self.updateHealth(11)
+		#self.updateHealth(GameState.getPlayer().getHealth())
+		self.updateHealth(30)
 
 	def updateHealth(self, health):
 		'''
@@ -103,7 +106,8 @@ class HUDManager:
 			self.elementGroup.add(self.hearts[-1])
 
 	def update(self, clock):
-		pass
+		#self.updateHealth(GameState.getPlayer().getHealth())
+		self.updateHealth(30)
 
 	def draw(self, screen):
 		self.elementGroup.draw(screen)
