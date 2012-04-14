@@ -57,9 +57,8 @@ class GameState(State):
 		self.currentMap = startMap
 		self.hud = HUDManager()
 		
-		npc_one = Enemy(self, 300, 300, "skeleton")
-		GameState.enemyGroup.add(npc_one)
-		npc_one.movetowards(500,400)
+		GameState.enemyGroup.add(Enemy(self, self.player.rect.left, self.player.rect.top, "skeleton"))
+		GameState.enemyGroup.sprites()[0].movetowards(self.player.rect.left, self.player.rect.top)
 
 		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
@@ -84,6 +83,8 @@ class GameState(State):
 		super(GameState, self).update(clock)
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
+		for i in range(0, len(GameState.enemyGroup.sprites())):
+			GameState.enemyGroup.sprites()[i].movetowards(self.player.rect.left, self.player.rect.top)
 		GameState.enemyGroup.update(clock, [x.rect for x in self.background.atGroup])
 		self.hud.update(clock, self.player)
 
@@ -129,10 +130,9 @@ class GameState(State):
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
 		GameState.enemyGroup.empty()
-		npc_one = Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton")
-		GameState.enemyGroup.add(npc_one)
-		GameState.enemyGroup.add(Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton"))
-		GameState.enemyGroup.add(Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
 
 	def draw(self):
 		#draw background
