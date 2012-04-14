@@ -33,6 +33,13 @@ class WorldMap(object):
 		# Create surface to draw on
 		self.surface = pygame.Surface((self.dimX, self.dimY))
 
+		# Make game a faded out to draw attentiont to map.
+		# Fill it with black and add an alpha. Game should appear to "fade"
+		self.fadeSurface = pygame.Surface((config.WIDTH, config.HEIGHT))
+		self.fadeSurface.fill((0,0,0))
+		self.fadeSurface.set_alpha(180)
+
+
 		# Iterate through each map and generate image
 		for i in range(self.worldDimRows):
 			for j in range(self.worldDimCols):
@@ -105,5 +112,6 @@ class WorldMap(object):
 
 	def draw(self, screen):
 		if self.show:
+			screen.blit(self.fadeSurface, (0,0))
 			screen.blit(self.surface, self.pos)
 
