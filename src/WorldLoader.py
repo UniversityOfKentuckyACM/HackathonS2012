@@ -24,6 +24,9 @@ class WorldLoader(object):
 		# A dictionary of tuple -> mapname
 		self.world = {}
 
+		# A dictionary of mapname -> TerrainLayer (initially, None)
+		self.terrain = {}
+
 		self.north = {}
 		self.south = {}
 		self.east = {}
@@ -53,6 +56,7 @@ class WorldLoader(object):
 
 				# Load map into world dict
 				self.world[(i,j)] = key
+				self.terrain[key] = None
 
 				# now determine filenames for N/S/E/W maps. This replaces the
 				# old .world files
@@ -75,4 +79,8 @@ class WorldLoader(object):
 
 
 	def getMap(self, mapName):
-		return TerrainLayer(mapName)
+		terrain = self.terrain[mapName]
+		if terrain is None:
+			self.terrain[mapName] = terrain = TerrainLayer(mapName)
+		return terrain
+
