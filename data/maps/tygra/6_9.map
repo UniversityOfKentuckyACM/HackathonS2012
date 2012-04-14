@@ -1,12 +1,13 @@
 6_9.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # waterToxic.png
 W wall.png
 R rubbleDead.png
 T treeDyingBottom.png
 Q treeDyingTop.png
+F treeDyingForest.png
 [AT]
 MMMMMMMMMM..............MMMM
 MMMMMM........Q.........MMMM
@@ -27,8 +28,8 @@ MMMM...................TMMMM
 MMMM....Q.Q.Q.....Q.Q..QMMMM
 QQQQQ...T.T.T.....T.T..TMMMM
 TTTTTQQ................MMMMM
-.....TT....QQQQQQQ.....MMMMM
-......QQ...TTTTTTT....MMMMMM
+.....TF....QQQQQQQ.....MMMMM
+......FQ...TTTTTTT....MMMMMM
 ......TT............MMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM

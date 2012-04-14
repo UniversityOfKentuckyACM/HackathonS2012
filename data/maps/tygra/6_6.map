@@ -1,9 +1,9 @@
 6_6.map
 [RSC]
 G grassDead.png
-M mountain.png
+M rockyMountain.png
 # water.png
-S waterToxicWithStone.png
+s waterWithStone.png
 W wall.png
 T treeDyingBottom.png
 Q treeDyingTop.png
@@ -42,18 +42,18 @@ MMGGGRGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
-MM######S###################
-MM######S###################
-MM######S###################
-MM######S###################
-MM######S###################
-MM######S###################
-MM######SSSSSSSSSSSSSS######
-MM###################S######
-MM###################S######
-MM###################S######
-MM###################S######
-MM###################S######
+MM######s###################
+MM######s###################
+MM######s###################
+MM######s###################
+MM######s###################
+MM######s###################
+MM######ssssssssssssss######
+MM###################s######
+MM###################s######
+MM###################s######
+MM###################s######
+MM###################s######
 GGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMMMMMMMMMMMMMMMMMMMMGGGMMMM
