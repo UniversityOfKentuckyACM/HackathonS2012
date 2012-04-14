@@ -21,6 +21,7 @@ from WorldLoader import WorldLoader
 from TerrainLayer import TerrainLayer
 from HUDManager import HUDManager
 from Vector2 import Vector2
+from time import *
 import config
 
 class GameState(State):
@@ -87,6 +88,11 @@ class GameState(State):
 			x = (self.player.rect.left + self.player.rect.right) / 2
 			y = (self.player.rect.top + self.player.rect.bottom) / 2
 			GameState.enemyGroup.sprites()[i].movetowards(x, y)
+
+			if (self.player.rect.colliderect(GameState.enemyGroup.sprites()[i].rect)):
+				GameState.enemyGroup.sprites()[i].attack(self.player, 1)
+				print "AAAAAHHHHHHHHH!!!!!"
+
 		GameState.enemyGroup.update(clock, [x.rect for x in self.background.atGroup])
 		self.hud.update(clock, self.player)
 

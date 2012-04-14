@@ -167,3 +167,9 @@ class Player(Collider.Collider):
 	def getHealth(self):
 		return self.health
 
+	def damaged(self, damage):
+		self.health -= damage
+
+	def attack(self, target, damage):
+		target.damaged(damage)
+
