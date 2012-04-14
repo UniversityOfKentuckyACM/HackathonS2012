@@ -38,7 +38,7 @@ class GameState(State):
 		self.currentMap = startMap
 
 		# Initialize World Map
-		self.worldMap = WorldMap(self.wl)
+		#self.worldMap = WorldMap(self.wl)
 
 		# Initialize HUD
 		self.hud = HUDManager()
@@ -61,6 +61,8 @@ class GameState(State):
 		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.environment.atGroup])
+
+		#self.worldMap.update(clock)
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
@@ -89,8 +91,12 @@ class GameState(State):
 			mmap = self.wl.east[self.currentMap]
 		if mmap is not None:
 			self.currentMap = mmap
-			self.environment = TerrainLayer(mmap)
 			print "MAP: ", mmap
+			self.environment = self.wl.getMap(mmap)
+
+			# Added for debugging purposes. Remove when not needed
+			print "MAP: ", mmap
+
 
 
 	def nextMap(self, direction, pos):
@@ -142,7 +148,7 @@ class GameState(State):
 		self.environment.drawForeground(self.main.screen)
 
 		# draw world map
-		self.worldMap.draw(self.main.screen)
+		#self.worldMap.draw(self.main.screen)
 
 		# flip screen
 		super(GameState, self).draw()
