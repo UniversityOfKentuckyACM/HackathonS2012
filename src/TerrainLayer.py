@@ -24,21 +24,21 @@ class TerrainLayer(pygame.Surface):
 
 		thismap = Map.Map(mapname)
 
-		imagekeys = thismap.aliases.keys()
-		imagemap = {}
-		for x in imagekeys:
+		self.imagekeys = thismap.aliases.keys()
+		self.imagemap = {}
+		for x in self.imagekeys:
 			#load the image and key it the same
 			image, rect = util.loadImage(thismap.aliases[x])
 			surface = pygame.Surface((config.TILEX, config.TILEY))
 			surface.blit(image, rect)
-			imagemap[x] = surface
+			self.imagemap[x] = surface
 
 
 		#blit the tiles...
 		for y in range(config.HEIGHT / config.TILEY):
 			for x in range(config.WIDTH / config.TILEX - 4):
 				if thismap.belowLayer[y][x] != '.':
-					self.blit(imagemap[thismap.belowLayer[y][x]], ((x + 2) * config.TILEX, y * config.TILEY))
+					self.blit(self.imagemap[thismap.belowLayer[y][x]], ((x + 2) * config.TILEX, y * config.TILEY))
 
 		#load sprites for at layer and over layer
 		self.atGroup = pygame.sprite.RenderPlain()

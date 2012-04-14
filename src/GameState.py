@@ -13,7 +13,7 @@ from State import State
 from Actor import Actor
 from Player import Player
 from WorldLoader import WorldLoader
-from TerrainLayer import TerrainLayer
+from WorldMap import WorldMap
 from HUDManager import HUDManager
 from Vector2 import Vector2
 import config
@@ -30,28 +30,31 @@ class GameState(State):
 		# transition from another state
 		super(GameState, self).__init__(main)
 		self.loadPlayer()
+
+		# Initialize World
 		self.wl = WorldLoader(config.WORLD_NAME)
 		startMap = os.path.join("tygra", "0_0.map") 
-		self.background = TerrainLayer(startMap)
+		self.background = self.wl.getMap(startMap)
 		self.currentMap = startMap
-
+		
+		# Initialize World Map
+		self.worldMap = WorldMap(self.wl)
+		
+		# Initialize HUD
 		self.hud = HUDManager()
-
-		'''TODO: FIX MUSIC
-		pygame.mixer.init()
-		filename = "worldAmbient.ogg"
+		'''TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
 		path = os.path.join(util.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
 		'''
-
 	def __del__(self):
 		# transition to another state
 		super(GameState, self).__del__()
 
 	def loadPlayer(self):
 		self.player = Player(self)
+		self.player.mapPos = [0,0]
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
@@ -96,32 +99,36 @@ class GameState(State):
 
 		if direction == 'up':
 			mmap = self.wl.north[self.currentMap]
+			# update player mapPos
+			self.player.mapPos[1] -= 1
 			# position player at bottom minus almost half a tile
 			if mmap is not None:
 				self.player.setPos(pos[0], config.HEIGHT - 17)
 		elif direction == 'down':
 			mmap = self.wl.south[self.currentMap]
+			self.player.mapPos[1] += 1
 			if mmap is not None:
 				self.player.setPos(pos[0], 17)
 		elif direction == 'right':
+			self.player.mapPos[0] += 1
 			mmap = self.wl.east[self.currentMap]
 			if mmap is not None:
 				self.player.setPos(64 + 17, pos[1]) # just not touching the hud
 		elif direction == 'left':
+			self.player.mapPos[0] -= 1
 			mmap = self.wl.west[self.currentMap]
 			if mmap is not None:
 				self.player.setPos(config.WIDTH - (64 + 17), pos[1])
 
 		if mmap is not None:
 			self.currentMap = mmap
-			self.background = TerrainLayer(mmap)
+			self.background = self.wl.getMap(mmap)
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
 
 	def draw(self):
 		#draw background
-		#self.main.screen.blit(self.background, self.background.get_rect())
 		self.background.drawTerrain(self.main.screen);
 
 		# draw player
@@ -129,6 +136,9 @@ class GameState(State):
 
 		# draw gui
 	#	self.hud.draw(self.main.screen)
+
+		# draw world map
+		self.worldMap.draw(self.main.screen)
 
 		# flip screen
 		super(GameState, self).draw()
