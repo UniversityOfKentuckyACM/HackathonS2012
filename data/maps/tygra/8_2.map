@@ -3,6 +3,8 @@ Tile8_2
 s sand.png
 O water.png
 M rockyMountain.png
+t treeTop.png
+b treeBottom.png
 f dirt.png
 G grass.png
 [AT]
