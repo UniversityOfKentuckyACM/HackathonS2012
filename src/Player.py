@@ -38,7 +38,7 @@ class Player(Collider.Collider):
 		to alter this to support animation.
 	'''
 	
-	def __init__(self, gameState, mapStart=[0,0]):
+	def __init__(self, gameState):
 		super(Player,self).__init__()
 
 		# load all images
@@ -54,9 +54,6 @@ class Player(Collider.Collider):
 		# assign image and position
 		self.setImage(self.images[self.direction])
 		self.setPos(START_X, START_Y)
-
-		# [column, row] of which map screen player is in
-		self.mapPos = mapStart
 
 		# load sword
 		self.swordLeft = pygame.sprite.Sprite()
