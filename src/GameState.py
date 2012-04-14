@@ -12,6 +12,8 @@ import os
 import NPC
 from Enemy import Enemy
 
+from random import *
+
 from State import State
 from Actor import Actor
 from Player import Player
@@ -127,6 +129,10 @@ class GameState(State):
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
 		GameState.enemyGroup.empty()
+		npc_one = Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton")
+		GameState.enemyGroup.add(npc_one)
+		GameState.enemyGroup.add(Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, 1001), randrange(1, 1001), "skeleton"))
 
 	def draw(self):
 		#draw background
