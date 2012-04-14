@@ -8,7 +8,10 @@ s fronthouseshingles.png
 G ground.png
 D dirt.png
 M mountain.png
-
+h houseWall.png
+b doorBottom.png
+t doorTop.png
+c houseWindow.png
 [AT]
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM

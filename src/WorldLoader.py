@@ -3,6 +3,9 @@ import os
 import sys
 import util
 
+import pygame
+from TerrainLayer import TerrainLayer
+
 class WorldLoader:
 	"""
 		Parse of *.world files. They are of the format:
@@ -18,6 +21,9 @@ class WorldLoader:
 	DIR = "DIR"
 
 	def __init__(self, worldname):
+		# A dictionary of tuple -> mapname
+		self.world = {}
+
 		self.north = {}
 		self.south = {}
 		self.east = {}
@@ -45,6 +51,9 @@ class WorldLoader:
 				key = os.path.join(self.dir, key)
 				# key should now be "dir/i_j.map"
 
+				# Load map into world dict
+				self.world[(i,j)] = key
+
 				# now determine filenames for N/S/E/W maps. This replaces the
 				# old .world files
 				if j > 0:
@@ -64,3 +73,6 @@ class WorldLoader:
 				else:
 					self.east[key] = None
 				
+
+	def getMap(self, mapName):
+		return TerrainLayer(mapName)

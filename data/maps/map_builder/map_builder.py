@@ -68,6 +68,14 @@ def addRsc(char):
 			rsc_list.append('* impassableRock.png')
 		elif (char == '_'):
 			rsc_list.append('_ ground.png')
+		elif (char == 'h'):
+			rsc_list.append('h houseWall.png')
+		elif (char == 'b'):
+			rsc_list.append('b doorBottom.png')
+		elif (char == 't'):
+			rsc_list.append('t doorTop.png')
+		elif (char == 'c')
+			rsc_list.append('c houseWindow.png')
 
 def drawLayer(layer, drawType, char, x1=0, y1=0, x2=0, y2=0):
 	addRsc(char)
