@@ -41,10 +41,6 @@ class Player(Collider.Collider):
 	def __init__(self,gameState):
 		super(Player,self).__init__()
 
-		# health and stuff
-		self.alive = True
-		self.health = 10
-
 		# load all images
 		# up, down, left, right
 		self.images = [0] * 4
@@ -131,19 +127,8 @@ class Player(Collider.Collider):
 
 			self.magi.add(self.gameState.playerGroup)
 
-	def damaged(self, damage):
-		health -= damage
-
-	def attack(self, target, damage):
-		target.damaged(damage)
-
 	def update(self, clock, environment):
 		from config import keyboard, keymap
-
-		# am i alive?
-		if (self.health <= 0):
-			alive = False
-			return False
 
 		vel = Vector2(0, 0);
 		if keyboard.down(keymap.UP):
