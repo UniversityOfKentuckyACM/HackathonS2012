@@ -22,6 +22,10 @@ class WorldMap(object):
 		self.dimX = self.wl.cols * Map.NUM_COLS * WorldMap.PIXELS_PER_TILE
 		self.dimY = self.wl.rows * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
 
+		# Positioned by top-left corner -- center it
+		self.pos = ((config.WIDTH / 2) - (self.dimX / 2), 
+			(config.HEIGHT / 2) - (self.dimY / 2))
+
 		self.surface = pygame.Surface((self.dimX, self.dimY))
 		for i in range(self.dimX):
 			for j in range(self.dimY):
@@ -36,5 +40,5 @@ class WorldMap(object):
 		pass
 	
 	def draw(self, screen):
-		screen.blit(self.surface, (300,300))
+		screen.blit(self.surface, self.pos)
 		
