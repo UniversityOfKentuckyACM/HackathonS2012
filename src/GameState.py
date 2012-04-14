@@ -126,6 +126,7 @@ class GameState(State):
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
+		GameState.enemyGroup.empty()
 
 	def draw(self):
 		#draw background
