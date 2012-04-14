@@ -1,6 +1,7 @@
 -
 [RSC]
 S sand.png
+M mountain.png
 
 [AT]
 ............................
@@ -26,7 +27,7 @@ S sand.png
 ............................
 ............................
 ............................
-SSSSSSSSSSSSSSSSSSSSSSSSSSSS
+MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
 [UNDER]
 SSSSSSSSSSSSSSSSSSSSSSSSSSSS
@@ -52,6 +53,6 @@ SSSSSSSSSSSSSSSSSSSSSSSSSSSS
 SSSSSSSSSSSSSSSSSSSSSSSSSSSS
 SSSSSSSSSSSSSSSSSSSSSSSSSSSS
 SSSSSSSSSSSSSSSSSSSSSSSSSSSS
-SSSSSSSSSSSSSSSSSSSSSSSSSSSS
+............................
 
 [ENTITY]
