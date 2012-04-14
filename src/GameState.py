@@ -87,7 +87,7 @@ class GameState(State):
 		if mmap is not None:
 			self.currentMap = mmap
 			self.environment = TerrainLayer(mmap)
-        		print "MAP: ", mmap
+			print "MAP: ", mmap
 
 
 	def nextMap(self, direction, pos):
