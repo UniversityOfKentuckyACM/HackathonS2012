@@ -30,22 +30,74 @@ class WorldMap(object):
 		# Create surface to draw on
 		self.surface = pygame.Surface((self.dimX, self.dimY))
 
-		# TEMP
-		for i in range(self.dimX):
-			for j in range(self.dimY):
-				self.surface.set_at((i,j), (200, 10, 200, 0))
-
 		# Iterate through each map and generate image
 		for i in range(self.worldDimRows):
 			for j in range(self.worldDimCols):
 				self.genImage(i,j)
 		
 	def genImage(self, row, col):
+		print("(%d, %d)" % (row, col))
 		# Load current map
 		layer = TerrainLayer(self.wl.world[(row,col)])
+		map = Map(self.wl.world[(row,col)])
 
-		# Grab a list of tiles in current map
+		# Grab a dict of tilename -> image
 		tiles = layer.imagemap
+		
+		# Store the avg color of each tile
+		tileVals = {}
+
+		# now determine the average color of each tile
+		for tile, img in tiles.items():
+			avgR = 0
+			avgG = 0
+			avgB = 0
+			for x in range(config.TILEX):
+				for y in range(config.TILEY):
+					r,g,b,a = img.get_at((x,y))
+					avgR += r
+					avgG += g
+					avgB += b
+
+			avgR /= config.TILEX * config.TILEY
+			avgG /= config.TILEX * config.TILEY
+			avgB /= config.TILEX * config.TILEY
+
+			# Store average value
+			# 255 = opaque
+			tileVals[tile] = (avgR, avgG, avgB, 255)
+		
+		# Top left corner of where we'll draw
+		startx = col * Map.NUM_COLS * WorldMap.PIXELS_PER_TILE
+		starty = row * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
+
+		# for each tile in current map
+		for i in range(Map.NUM_ROWS):
+			# y coordinate to draw
+			y = starty + (i * WorldMap.PIXELS_PER_TILE)
+			
+			# Traverse row
+			for j in range(Map.NUM_COLS):
+				# x coordinate to draw
+				x = startx + (j * WorldMap.PIXELS_PER_TILE)
+
+				tile = '.'
+				if map.atLayer[i][j] != '.':
+					tile = map.atLayer[i][j]
+				else:
+					tile = map.belowLayer[i][j]
+
+				if tile != '.':
+					self.surface.set_at((x,y), tileVals[tile])
+					self.surface.set_at((x+1,y), tileVals[tile])
+					self.surface.set_at((x,y+1), tileVals[tile])
+					self.surface.set_at((x+1,y+1), tileVals[tile])
+					'''
+					for currX in range(WorldMap.PIXELS_PER_TILE):
+						for currY in range(WorldMap.PIXELS_PER_TILE):
+							self.surface.set_at((startx+currX, starty+currY), tileVals[tile])
+					'''
+
 
 	def draw(self, screen):
 		screen.blit(self.surface, self.pos)
