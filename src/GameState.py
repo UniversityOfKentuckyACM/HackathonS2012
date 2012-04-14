@@ -9,6 +9,8 @@ import sys
 import math
 import os
 
+import NPC
+
 from State import State
 from Actor import Actor
 from Player import Player
@@ -51,7 +53,8 @@ class GameState(State):
 		GameState.terrainLayer = self.background
 		self.currentMap = startMap
 		self.hud = HUDManager()
-		
+
+		''' npc_one = NPC(self, 30, 30, "Skeleton") '''
 		'''TODO: FIX MUSIC
 		pygame.mixer.init()
 		filename = "worldAmbient.ogg"
