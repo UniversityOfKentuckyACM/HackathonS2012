@@ -36,10 +36,10 @@ class WorldMap(object):
 				self.genImage(i,j)
 		
 	def genImage(self, row, col):
-		print("(%d, %d)" % (row, col))
+		#print("(%d, %d)" % (row, col))
 		# Load current map
-		layer = TerrainLayer(self.wl.world[(row,col)])
-		map = Map(self.wl.world[(row,col)])
+		layer = TerrainLayer(self.wl.world[(col,row)])
+		map = Map(self.wl.world[(col, row)])
 
 		# Grab a dict of tilename -> image
 		tiles = layer.imagemap
@@ -52,16 +52,16 @@ class WorldMap(object):
 			avgR = 0
 			avgG = 0
 			avgB = 0
-			for x in range(config.TILEX):
-				for y in range(config.TILEY):
+			for x in range(0,config.TILEX,2):
+				for y in range(0,config.TILEY,2):
 					r,g,b,a = img.get_at((x,y))
 					avgR += r
 					avgG += g
 					avgB += b
 
-			avgR /= config.TILEX * config.TILEY
-			avgG /= config.TILEX * config.TILEY
-			avgB /= config.TILEX * config.TILEY
+			avgR /= config.TILEX * config.TILEY / 4
+			avgG /= config.TILEX * config.TILEY / 4
+			avgB /= config.TILEX * config.TILEY / 4
 
 			# Store average value
 			# 255 = opaque
@@ -72,20 +72,20 @@ class WorldMap(object):
 		starty = row * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
 
 		# for each tile in current map
-		for i in range(Map.NUM_ROWS):
-			# y coordinate to draw
-			y = starty + (i * WorldMap.PIXELS_PER_TILE)
+		for i in range(Map.NUM_COLS):
+			# x coordinate to draw
+			x = startx + (i * WorldMap.PIXELS_PER_TILE)
 			
 			# Traverse row
-			for j in range(Map.NUM_COLS):
-				# x coordinate to draw
-				x = startx + (j * WorldMap.PIXELS_PER_TILE)
+			for j in range(Map.NUM_ROWS):
+				# y coordinate to draw
+				y = starty + (j * WorldMap.PIXELS_PER_TILE)
 
 				tile = '.'
-				if map.atLayer[i][j] != '.':
-					tile = map.atLayer[i][j]
+				if map.atLayer[j][i] != '.':
+					tile = map.atLayer[j][i]
 				else:
-					tile = map.belowLayer[i][j]
+					tile = map.belowLayer[j][i]
 
 				if tile != '.':
 					self.surface.set_at((x,y), tileVals[tile])
