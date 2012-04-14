@@ -91,8 +91,10 @@ class GameState(State):
 			mmap = self.wl.east[self.currentMap]
 		if mmap is not None:
 			self.currentMap = mmap
-			self.background = TerrainLayer(mmap)
+			self.background = self.wl.getMap(mmap)
+      			# Added for debugging purposes. Remove when not needed
         		print "MAP: ", mmap
+
 
 
 	def nextMap(self, direction, pos):
