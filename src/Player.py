@@ -141,7 +141,7 @@ class Player(Collider.Collider):
 		from config import keyboard, keymap
 
 		# am i alive?
-		if (health <= 0)
+		if (self.health <= 0):
 			alive = False
 			return False
 
