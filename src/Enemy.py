@@ -10,9 +10,8 @@ import config
 import GameState
 
 class Enemy(NPC.NPC):
-	def __init__(self):
-		super(Enemy, self).__init__()
-
+	def __init__(self, gameState, x, y, name):
+		super(Enemy, self).__init__(gameState, x, y, name)
 		self.alive = True
 		self.health = 4
 
