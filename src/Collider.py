@@ -14,7 +14,7 @@ class Collider(Actor.Actor):
 		"""
 			Generate next rectangles from current velocity
 		"""
-		return self.rect.move(self.vel.x, 0), self.rect.move(0, self.vel.y)
+		return self.rect.inflate(-5, -5).move(self.vel.x, 0), self.rect.inflate(-5, -5).move(0, self.vel.y)
 
 	def collide(self, environment):
 		"""
