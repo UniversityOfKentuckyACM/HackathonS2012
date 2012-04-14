@@ -72,8 +72,7 @@ class HUDManager:
 		# Initialize health 'hearts'.
 		self.hearts = []
 
-		#self.updateHealth(GameState.getPlayer().getHealth())
-		self.updateHealth(30)
+		self.updateHealth(10)
 
 	def updateHealth(self, health):
 		'''
@@ -105,9 +104,8 @@ class HUDManager:
 			)
 			self.elementGroup.add(self.hearts[-1])
 
-	def update(self, clock):
-		#self.updateHealth(GameState.getPlayer().getHealth())
-		self.updateHealth(30)
+	def update(self, clock, player):
+		self.updateHealth(player.getHealth())
 
 	def draw(self, screen):
 		self.elementGroup.draw(screen)

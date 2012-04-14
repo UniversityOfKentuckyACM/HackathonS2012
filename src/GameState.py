@@ -32,7 +32,6 @@ class GameState(State):
 	cachedPathGraph = None
 	curPathGraph = None
 
-	@staticmethod
 	def getPlayer():
 		assert(player != None)
 		return GameState.player
@@ -78,7 +77,7 @@ class GameState(State):
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
 
-		self.hud.update(clock)
+		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()

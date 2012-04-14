@@ -67,6 +67,10 @@ class Player(Collider.Collider):
 
 		self.gameState = gameState
 
+		#health
+		self.health = 10
+		self.alive = True
+
 	# Orient player with mouse
 	def orient(self, mousePos):
 		loc = mousePos - Vector2(self.getPos())
@@ -156,6 +160,6 @@ class Player(Collider.Collider):
 		elif self.rect.bottom > config.HEIGHT:
 			self.gameState.nextMap("down", self.getPos())
 
-	def getHealth():
-		return health
+	def getHealth(self):
+		return self.health
 
