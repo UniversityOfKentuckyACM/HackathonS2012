@@ -73,8 +73,8 @@ class Player(Collider.Collider):
 
 	# Orient player with mouse
 	def orient(self, mousePos):
-		loc = mousePos - Vector2(self.getPos())
-		angle = math.atan2(loc.x, loc.y)
+		self.dirVec = mousePos - Vector2(self.getPos())
+		angle = math.atan2(self.dirVec.x, self.dirVec.y)
 		mag = math.fabs(angle)
 
 		# if we're facing to the right
@@ -122,14 +122,14 @@ class Player(Collider.Collider):
 
 	# TODO: Add to this
 	def useMagic(self):
-			'''
-			When space bar is pressed, magic is thrown towards the mouse pointer
-			Or infront of the character *Choice*
-			'''
-			pos = self.rect.center
-			self.magi = Magic(pos[0], pos[1])
+		'''
+		When space bar is pressed, magic is thrown towards the mouse pointer
+		Or infront of the character *Choice*
+		'''
+		pos = self.rect.center
+		self.magi = Magic(pos[0], pos[1],self.dirVec)
 
-			self.magi.add(self.gameState.playerGroup)
+		self.magi.add(self.gameState.playerGroup)
 
 	def update(self, clock, environment):
 		from config import keyboard, keymap

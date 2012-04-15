@@ -130,7 +130,7 @@ class GameState(State):
 				if pygame.mouse.get_pressed()[0]:
 					self.player.swingSword()
 				if pygame.mouse.get_pressed()[2]:
-					self.player.shootBow()
+					self.player.useMagic()
 
 	def sudoNext(self):
 	#Used for debugging,
