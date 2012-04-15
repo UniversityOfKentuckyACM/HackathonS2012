@@ -6,13 +6,13 @@ import util
 import pygame
 from TerrainLayer import TerrainLayer
 
-class WorldLoader:
+class WorldLoader(object):
 	"""
 		Parse of *.world files. They are of the format:
 			ROWS %d
 			COLUMNS %d
 			DIR %s
-		Where DIR is the directory (relative) in which the necessary .map files 
+		Where DIR is the directory (relative) in which the necessary .map files
 		can be found. They are expected to be named MYROW_MYCOL.map
 	"""
 
@@ -23,6 +23,9 @@ class WorldLoader:
 	def __init__(self, worldname):
 		# A dictionary of tuple -> mapname
 		self.world = {}
+
+		# A dictionary of mapname -> TerrainLayer (initially, None)
+		self.terrain = {}
 
 		self.north = {}
 		self.south = {}
@@ -53,6 +56,7 @@ class WorldLoader:
 
 				# Load map into world dict
 				self.world[(i,j)] = key
+				self.terrain[key] = (i, j, None)
 
 				# now determine filenames for N/S/E/W maps. This replaces the
 				# old .world files
@@ -72,7 +76,13 @@ class WorldLoader:
 					self.east[key] = os.path.join(self.dir, "%d_%d.map" % (i+1, j))
 				else:
 					self.east[key] = None
-				
 
-	def getMap(self, mapName):
-		return TerrainLayer(mapName)
+
+	def getMap(self, mapName, worldMap):
+		row, col, terrain = self.terrain[mapName]
+		if terrain is None:
+			terrain = TerrainLayer(mapName)
+			worldMap.genImage(col, row)
+			self.terrain[mapName] = (row, col, terrain)
+		return terrain
+

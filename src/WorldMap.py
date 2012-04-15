@@ -7,7 +7,7 @@ from TerrainLayer import TerrainLayer
 import config
 
 class WorldMap(object):
-	
+
 	# How many pixels (in each dimension) we use to represent each tile
 	PIXELS_PER_TILE = 2
 
@@ -17,7 +17,7 @@ class WorldMap(object):
 
 		# Don't display by default
 		self.show = False
-		
+
 		# Dimensions of worlds
 		self.worldDimRows = self.wl.rows
 		self.worldDimCols = self.wl.cols
@@ -27,7 +27,7 @@ class WorldMap(object):
 		self.dimY = self.wl.rows * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
 
 		# Positioned by top-left corner -- center it
-		self.pos = ((config.WIDTH / 2) - (self.dimX / 2), 
+		self.pos = ((config.WIDTH / 2) - (self.dimX / 2),
 			(config.HEIGHT / 2) - (self.dimY / 2))
 
 		# Create surface to draw on
@@ -39,21 +39,14 @@ class WorldMap(object):
 		self.fadeSurface.fill((0,0,0))
 		self.fadeSurface.set_alpha(180)
 
-
-		# Iterate through each map and generate image
-		for i in range(self.worldDimRows):
-			for j in range(self.worldDimCols):
-				self.genImage(i,j)
-		
 	def genImage(self, row, col):
-		#print("(%d, %d)" % (row, col))
 		# Load current map
 		layer = TerrainLayer(self.wl.world[(col,row)])
 		map = Map(self.wl.world[(col, row)])
 
 		# Grab a dict of tilename -> image
 		tiles = layer.imagemap
-		
+
 		# Store the avg color of each tile
 		tileVals = {}
 
@@ -76,7 +69,7 @@ class WorldMap(object):
 			# Store average value
 			# 255 = opaque
 			tileVals[tile] = (avgR, avgG, avgB, 255)
-		
+
 		# Top left corner of where we'll draw
 		startx = col * Map.NUM_COLS * WorldMap.PIXELS_PER_TILE
 		starty = row * Map.NUM_ROWS * WorldMap.PIXELS_PER_TILE
@@ -85,7 +78,7 @@ class WorldMap(object):
 		for i in range(Map.NUM_COLS):
 			# x coordinate to draw
 			x = startx + (i * WorldMap.PIXELS_PER_TILE)
-			
+
 			# Traverse row
 			for j in range(Map.NUM_ROWS):
 				# y coordinate to draw

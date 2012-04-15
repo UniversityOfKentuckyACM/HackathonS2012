@@ -33,13 +33,16 @@ class GameState(State):
 
 		# Initialize World
 		self.wl = WorldLoader(config.WORLD_NAME)
-		startMap = os.path.join("tygra", "0_0.map") 
-		self.background = self.wl.getMap(startMap)
-		self.currentMap = startMap
-		
+
 		# Initialize World Map
 		self.worldMap = WorldMap(self.wl)
-		
+		startMap = os.path.join("tygra", "0_0.map")
+
+		# Starting map
+		self.environment = self.wl.getMap(startMap, self.worldMap)
+		self.currentMap = startMap
+
+
 		# Initialize HUD
 		self.hud = HUDManager()
 		'''TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
@@ -60,7 +63,7 @@ class GameState(State):
 	def update(self, clock):
 		super(GameState, self).update(clock);
 		GameState.guiGroup.update(clock)
-		GameState.playerGroup.update(clock, [x.rect for x in self.background.atGroup])
+		GameState.playerGroup.update(clock, [x.rect for x in self.environment.atGroup])
 
 		self.worldMap.update(clock)
 
@@ -91,11 +94,11 @@ class GameState(State):
 			mmap = self.wl.east[self.currentMap]
 		if mmap is not None:
 			self.currentMap = mmap
-			self.background = self.wl.getMap(mmap)
-      			# Added for debugging purposes. Remove when not needed
-        		print "MAP: ", mmap
+			print "MAP: ", mmap
+			self.environment = self.wl.getMap(mmap, self.worldMap)
 
-
+			# Added for debugging purposes. Remove when not needed
+			print "MAP: ", mmap
 
 	def nextMap(self, direction, pos):
 		# print "moving to: " + direction + " via: " + str(pos)
@@ -126,20 +129,24 @@ class GameState(State):
 
 		if mmap is not None:
 			self.currentMap = mmap
-			self.background = self.wl.getMap(mmap)
+			self.environment = self.wl.getMap(mmap, self.worldMap)
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
 
 	def draw(self):
-		#draw background
-		self.background.drawTerrain(self.main.screen);
+		#draw environment
+		#self.main.screen.blit(self.environment, self.environment.get_rect())
+		self.environment.drawBackground(self.main.screen);
 
 		# draw player
 		GameState.playerGroup.draw(self.main.screen)
 
 		# draw gui
-	#	self.hud.draw(self.main.screen)
+		# self.hud.draw(self.main.screen)
+
+		# draw foreground
+		self.environment.drawForeground(self.main.screen)
 
 		# draw world map
 		self.worldMap.draw(self.main.screen)

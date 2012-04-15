@@ -54,8 +54,10 @@ class TerrainLayer(pygame.Surface):
 					sprite.image, sprite.rect = util.loadImage(thismap.aliases[thismap.overLayer[y][x]])
 					sprite.rect.topleft = ((x + 2) * config.TILEX, y * config.TILEY)
 
-	def drawTerrain(self, screen):
+	def drawBackground(self, screen):
 		screen.blit(self, self.get_rect())
 		self.atGroup.draw(screen)
+
+	def drawForeground(self, screen):
 		self.overGroup.draw(screen)
 

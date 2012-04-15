@@ -13,7 +13,7 @@ from GameState import GameState
 from TitleState import TitleState
 import config
 
-class Game():
+class Game(object):
 	def __init__(self):
 		# load background image
 		#self.g.loadBackground(BACKGROUND_IMAGE)

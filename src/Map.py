@@ -1,16 +1,9 @@
 
 import util
 
-class Map:
+class Map(object):
 	NUM_ROWS = 24
 	NUM_COLS = 28
-
-	mapName = "map"
-	aliases = {}
-	atLayer = []
-	belowLayer = []
-	overLayer = []
-	entities = []
 
 	def getEntities(self):
 		return self.entities
@@ -20,6 +13,9 @@ class Map:
 
 	def getBelowLayer(self):
 		return self.belowLayer
+
+	def getOverLayer(self):
+		return self.overLayer
 
 	def clean(self, contents):
 		'''
@@ -34,6 +30,11 @@ class Map:
 		return cleanContents
 
 	def __init__(self, mapName):
+		self.aliases = {}
+		self.atLayer = []
+		self.belowLayer = []
+		self.overLayer = []
+		self.entities = []
 		for y in range(Map.NUM_ROWS):
 			blanks = ['.'] * Map.NUM_COLS
 			self.atLayer.append(blanks[:])
@@ -42,6 +43,7 @@ class Map:
 
 		f = util.loadMap(mapName)
 		lines = self.clean(f.readlines())
+		f.close()
 		end = len(lines)
 		lineIndex = 0
 		self.mapName = lines[lineIndex]
