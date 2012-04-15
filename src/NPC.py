@@ -36,7 +36,7 @@ class NPC(Collider.Collider):
 		self.state = STATE_MOVING
 		
 	def update(self, clock, environment):
-		print "inner",self.rect.center[0], self.rect.center[1]
+		#print "inner",self.rect.center[0], self.rect.center[1]
 		
 		if self.state == STATE_MOVING:
 			if self.sqDistanceFrom(self.destination) < 4:

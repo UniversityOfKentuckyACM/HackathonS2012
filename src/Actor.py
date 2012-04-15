@@ -13,11 +13,15 @@ class Actor(pygame.sprite.Sprite):
 		www.pygame.org/docs/tut/chimp/ChimpLineByLine.html
 	"""
 
-	def __init__(self, imageFile=None, colorKey=None):
+	def __init__(self, imageFile=None, colorKey=None, mapStart=[0,0]):
 		"""
 			If supplied with an image load it. Also initialize velocity to (0,0).
 		"""
+	
 		pygame.sprite.Sprite.__init__(self)
+
+		# [column, row] of which map screen player is in
+		self.mapPos = mapStart
 
 		if imageFile is not None:
 			self.loadImage(imageFile, colorKey)

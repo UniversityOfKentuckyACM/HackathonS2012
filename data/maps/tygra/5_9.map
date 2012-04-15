@@ -1,33 +1,34 @@
 5_9.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # waterToxic.png
 W wall.png
 R rubbleDead.png
 T treeDyingBottom.png
 Q treeDyingTop.png
+F treeDyingForest.png
 [AT]
-MMMMMMMMMMMMMMMMMMMMMMM....M
-MMMMMMMMMMMMMMMMMMMMMMM....M
+MMMMMMMMMMMMMMMMMMMMMMMM...M
+MMMMMMMMMMMMMMMMMMMMMMMM...M
 MMMMMMMMMMMMMMMMMMMMMMM....M
 MM.............MMMMMMMM....M
 MM..#########....MMMMMM....M
-MM.##########....MMMMMQ....M
-MM.######..###...QMMMQT....M
-MM..Q####........TMMQT....MM
+MM.##########....MMMMMM....M
+MM.######..###...MMMMMT....M
+MM...####........TMMMT....MM
 MM..T#####........MMT....MMM
-MM....Q####QQQQQ.......QMMMM
-MMM...T####TTQQQQQQQQQQQMMMM
-MMMM.........TTQQQQQQQTTMMMM
-MMMMM..........TTQQQQQ......
-MM..MMM..........TQQQT......
-MMQ..MMM..........QQQ.....QQ
-MMT............Q..QQQ....QQQ
-MM...MMM.......T..QQQ..Q.TQQ
-MM..MMM...........QQQ..T..TQ
-MMMMM............QQQQQ.....T
-MMM.............QQQQQQQ.....
+MM.....####.............MMMM
+MMM...T####TTFFF.......FMMMM
+MMMM.........TTFFFFFFFTTMMMM
+MMMMM..........TTFFFFF......
+MM..MMM..........TFFFT......
+MM...MMM..........FFF.......
+MMT...............FFF.....FF
+MM...MMM.......T..FFF....TFF
+MM..MMM...........FFF..T..TF
+MMMMM.............FFF......T
+MMM..............FFFFF......
 MMM.............TTTTTTT.....
 MMMM........................
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -42,21 +43,46 @@ MMGGGGGGGGGGGGGGGMMMMMMGGGGM
 MMGGGGGGGGGGGGGGGMMMMMGGGGGM
 MMGGGGGGGGGGGGGGGGMMMGGGGGGM
 MMGGGGGGGGGGGGGGGGGGGGGGGGGM
-MMGGGGGGGGGGGGGGGGGGGGGTGGGM
-MMGGGGGGGGGGGTTTGGGGGGGTGGGM
-MMGGGGGGGGGGGTTTGGGGGGGGMMMM
-MMGGGGGGGGGGGGGTTTTTTTGGGGGG
-MMGGGGGGGGGGGGGGGTTTTTGGGGGG
-MMGGGGGGGGGGGRGGGGTTTGGGGGTT
-MMGGGGGGGGGGGGGGGGTTTGGGGTTT
-MMGGGGGGGGGGGGGGGGTTTGGGGGTT
-MMGGGGGGGGGGGGRGGGTTTGGGGGGT
-MMGGGGGGGGGGGGGGGTTTTTGGGGGG
-MMGGGGGGRGGGGGGGTTTTTTTGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGM
+MMGGGGGGGGGGGGGGGGGGGGGGGGGM
+MMGGGGGGGGGGGGGGGGGGGGGGMMMM
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGRGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGGGGGGGRGGGGGGGGGGGGG
+MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+MMGGGGGGRGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
 MMGGGGGGGGGGGGGGGGGGGGGGGGGG
+[OVER]
+............................
+............................
+............................
+............................
+............................
+......................Q.....
+.................Q...Q......
+....Q...............Q.......
+............................
+......Q....QQQQQ.......Q....
+................QQQQQQQ.....
+............................
+............................
+............................
+..Q.......................QQ
+...............Q.........Q..
+.......................Q....
+............................
+.................Q...Q......
+................Q.....Q.....
+............................
+............................
+............................
+............................
 [ENTITY]
 Skel skeletonDown.png 320 480
 Skel2 skeletonDown.png 320 512

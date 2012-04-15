@@ -42,7 +42,7 @@ class HUDElement(Sprite):
 		self.rect.top = y
 
 
-class HUDManager:
+class HUDManager(object):
 	def __init__(self):
 		# Create sprite group for updating and drawing.
 		self.elementGroup = pygame.sprite.OrderedUpdates()

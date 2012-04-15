@@ -34,10 +34,10 @@ def addRsc(char):
 			rsc_list.append('g grass.png')
 		elif (char == 'm'):
 			rsc_list.append('r rockyMountain.png')
-		elif (char == 'P'):
-			rsc_list.append('P treeTop.png')
-		elif (char == 'p'):
-			rsc_list.append('p treeBottom.png')
+		elif (char == 't'):
+			rsc_list.append('t treeTop.png')
+		elif (char == 'b'):
+			rsc_list.append('b treeBottom.png')
 		elif (char == 'R'):
 			rsc_list.append('R rubbleDead.png')
 		elif (char == 'r'):

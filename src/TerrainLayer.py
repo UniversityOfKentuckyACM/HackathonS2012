@@ -24,32 +24,40 @@ class TerrainLayer(pygame.Surface):
 
 		thismap = Map.Map(mapname)
 
-		imagekeys = thismap.aliases.keys()
-		imagemap = {}
-		for x in imagekeys:
+		self.imagekeys = thismap.aliases.keys()
+		self.imagemap = {}
+		for x in self.imagekeys:
 			#load the image and key it the same
 			image, rect = util.loadImage(thismap.aliases[x])
 			surface = pygame.Surface((config.TILEX, config.TILEY))
 			surface.blit(image, rect)
-			imagemap[x] = surface
+			self.imagemap[x] = surface
 
 
 		#blit the tiles...
 		for y in range(config.HEIGHT / config.TILEY):
 			for x in range(config.WIDTH / config.TILEX - 4):
 				if thismap.belowLayer[y][x] != '.':
-					self.blit(imagemap[thismap.belowLayer[y][x]], ((x + 2) * config.TILEX, y * config.TILEY))
+					self.blit(self.imagemap[thismap.belowLayer[y][x]], ((x + 2) * config.TILEX, y * config.TILEY))
 
-		#load sprites for at layer
+		#load sprites for at layer and over layer
 		self.atGroup = pygame.sprite.RenderPlain()
+		self.overGroup = pygame.sprite.RenderPlain()
 		for y in range(config.HEIGHT / config.TILEY):
 			for x in range(config.WIDTH / config.TILEX - 4):
 				if thismap.atLayer[y][x] != '.':
 					sprite = pygame.sprite.Sprite(self.atGroup)
 					sprite.image, sprite.rect = util.loadImage(thismap.aliases[thismap.atLayer[y][x]])
 					sprite.rect.topleft = ((x + 2) * config.TILEX, y * config.TILEY)
+				if thismap.overLayer[y][x] != '.':
+					sprite = pygame.sprite.Sprite(self.overGroup)
+					sprite.image, sprite.rect = util.loadImage(thismap.aliases[thismap.overLayer[y][x]])
+					sprite.rect.topleft = ((x + 2) * config.TILEX, y * config.TILEY)
 
-	def drawTerrain(self, screen):
+	def drawBackground(self, screen):
 		screen.blit(self, self.get_rect())
 		self.atGroup.draw(screen)
+
+	def drawForeground(self, screen):
+		self.overGroup.draw(screen)
 

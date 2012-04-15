@@ -1,7 +1,7 @@
 75.map
 [RSC]
 G grassDead.png
-M rocks.png
+M rockyMountain.png
 # waterToxic.png
 S waterToxicWithStone.png
 % wall.png
@@ -27,9 +27,9 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 #####################......%
 #####################......%
 ....#################......%
-....#################......%
-....#################......%
-....#################......%
+.....################......%
+......###############MMMMMM%
+%%%%%%%##############MMMMMM%
 [UNDER]
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -52,7 +52,8 @@ SSSSSSSSSSSSSSSSSSSSSGGGGGGG
 #####################GGGGGGG
 #####################GGGGGGG
 GGGG#################GGGGGGG
-GGGG#################GGGGGGG
-GGGG#################GGGGGGG
-GGGG#################GGGGGGG
+GGGGG################GGGGGGG
+GGGGGG###############GGGGGGG
+GGGGGGG##############GGGGGGG
+
 [ENTITY]

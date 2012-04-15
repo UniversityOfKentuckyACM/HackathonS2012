@@ -21,12 +21,10 @@ class Enemy(NPC.NPC):
 			self.alive = False
 			return
 
-
-			
 		super(Enemy, self).update(clock, environment)
 
 	def damaged(self, damage):
-		health -= damage
+		self.health -= damage
 
 	def attack(self, target, damage):
 		target.damaged(damage)
