@@ -37,7 +37,7 @@ class Player(Collider.Collider):
 		Player class. images is a list of images for each direction. We may need
 		to alter this to support animation.
 	'''
-	
+
 	def __init__(self, gameState):
 		super(Player,self).__init__()
 
@@ -127,11 +127,11 @@ class Player(Collider.Collider):
 			Or infront of the character *Choice*
 			'''
 			pos = self.rect.center
-			self.magi = Magic(pos[0], pos[1])
+			self.magi = Magic(self, pos[0], pos[1])
 
 			self.magi.add(self.gameState.playerGroup)
 
-	def update(self, clock, environment):
+	def update(self, clock, player, enemies, surfaces):
 		from config import keyboard, keymap
 
 		#am i alive?
@@ -149,7 +149,7 @@ class Player(Collider.Collider):
 			vel.x += 1
 		self.vel = vel.normalized() * PLAYER_SPEED
 
-		super(Player, self).update(clock, environment, False)
+		super(Player, self).update(clock, player, enemies, surfaces)
 
 		if keyboard.downup(keymap.MAGIC):
 			self.useMagic()

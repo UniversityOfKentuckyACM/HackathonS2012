@@ -11,30 +11,32 @@ MAGIC_SPEED = Vector2(3, 3)
 MAGIC_ATTACK_IMAGE = "fireballRight.png"
 
 class Magic(Collider):
-        '''
-                Magic class for the magic attack
-        '''
-        loadedImage = 0
+		'''
+				Magic class for the magic attack
+		'''
+		loadedImage = 0
 
-        def __init__(self, x, y):
-            super(Magic,self).__init__()
+		def __init__(self, parent, x, y):
+			super(Magic,self).__init__()
+			self.dieoncollide = True
+			self.parent = parent
 
-            if Magic.loadedImage == 0:
-                Magic.loadedImage,tmp = util.loadImage(MAGIC_ATTACK_IMAGE)
+			if Magic.loadedImage == 0:
+				Magic.loadedImage,tmp = util.loadImage(MAGIC_ATTACK_IMAGE)
 
-            self.setImage(Magic.loadedImage)
+			self.setImage(Magic.loadedImage)
 
-            self.setPos(x, y)
+			self.setPos(x, y)
 
-            self.setVel(Vector2(MAGIC_SPEED))
+			self.setVel(Vector2(MAGIC_SPEED))
 
-        #Use to find coordinates of mouse relative to current pos. Set Vector
-        def magicPath(self):
-                pass
+		#Use to find coordinates of mouse relative to current pos. Set Vector
+		def magicPath(self):
+				pass
 
-        def update(self, clock, environment):
-            super(Magic,self).update(clock, environment, True)
+		def update(self, clock, player, enemies, surfaces):
+			super(Magic,self).update(clock, player, enemies, surfaces)
 
-            #Kill magic object if it reaches the windows bounds.
-            if self.rect.top > config.HEIGHT or self.rect.top < 0 or self.rect.right < 64 or self.rect.right > config.WIDTH - 64:
-                self.kill()
+			#Kill magic object if it reaches the windows bounds.
+			if self.rect.top > config.HEIGHT or self.rect.top < 0 or self.rect.right < 64 or self.rect.right > config.WIDTH - 64:
+				self.kill()

@@ -9,6 +9,8 @@ class Collider(Actor.Actor):
 	def __init__(self):
 		super(Collider, self).__init__()
 		self.collidex = self.collidey = False
+		self.parent = None
+		self.dieoncollide = False
 
 	def nextpos(self):
 		"""
@@ -16,24 +18,47 @@ class Collider(Actor.Actor):
 		"""
 		return self.rect.inflate(-5, -5).move(self.vel.x, 0), self.rect.inflate(-5, -5).move(0, self.vel.y)
 
-	def collide(self, environment):
+	def collide(self, xpos, ypos, other):
 		"""
 			Decide whether the object collides in x or y direction
 		"""
-		xpos, ypos = self.nextpos()
-		self.collidex = xpos.collidelist(environment) != -1
-		self.collidey = ypos.collidelist(environment) != -1
+		if self is not other and (self.parent is None or self.parent is not other):
+			self.collidex = xpos.colliderect(other.rect)
+			self.collidey = ypos.colliderect(other.rect)
 
-	def update(self, clock, environment, dies):
-		"""
-			Move unless collisions prevent one from doing so
-		"""
-		self.collide(environment)
+	def stop(self):
 		if self.collidex:
 			self.vel.x = 0
 		if self.collidey:
 			self.vel.y = 0
-		if (self.collidex or self.collidey) and dies:
+		if (self.collidex or self.collidey) and self.dieoncollide:
 			self.kill()
+
+	def hitplayer(self, clock, player):
+		self.stop()
+
+	def hitenemy(self, clock, enemy):
+		self.stop()
+
+	def hitsurface(self, clock, surface):
+		self.stop()
+
+	def update(self, clock, player, enemies, surfaces):
+		"""
+			Move unless collisions prevent one from doing so
+		"""
+
+		xpos, ypos = self.nextpos()
+		self.collide(xpos, ypos, player)
+		self.hitplayer(clock, player)
+
+		for enemy in enemies:
+			self.collide(xpos, ypos, enemy)
+			self.hitenemy(clock, player)
+
+		for surface in surfaces:
+			self.collide(xpos, ypos, surface)
+			self.hitsurface(clock, surface)
+
 		super(Collider, self).update(clock)
 
