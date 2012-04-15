@@ -39,9 +39,8 @@ class WorldMap(object):
 		self.fadeSurface.fill((0,0,0))
 		self.fadeSurface.set_alpha(180)
 
-	def genImage(self, row, col):
+	def genImage(self, row, col, layer):
 		# Load current map
-		layer = TerrainLayer(self.wl.world[(col,row)])
 		map = Map(self.wl.world[(col, row)])
 
 		# Grab a dict of tilename -> image

@@ -82,7 +82,7 @@ class WorldLoader(object):
 		row, col, terrain = self.terrain[mapName]
 		if terrain is None:
 			terrain = TerrainLayer(mapName)
-			worldMap.genImage(col, row)
+			worldMap.genImage(col, row, terrain)
 			self.terrain[mapName] = (row, col, terrain)
 		return terrain
 
