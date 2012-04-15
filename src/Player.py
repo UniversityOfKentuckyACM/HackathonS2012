@@ -129,7 +129,7 @@ class Player(Collider.Collider):
 		pos = self.rect.center
 		self.magi = Magic(pos[0], pos[1], self.dirVec, self)
 
-		self.magi.add(self.gameState.playerGroup)
+		self.magi.add(self.gameState.weaponGroup)
 
 	def update(self, clock, player, enemies, surfaces):
 		from config import keyboard, keymap

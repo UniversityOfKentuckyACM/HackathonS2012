@@ -32,6 +32,7 @@ class GameState(State):
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
 	enemyGroup = pygame.sprite.RenderPlain()
+	weaponGroup = pygame.sprite.RenderPlain()
 	player = None
 	terrainLayer = None
 	cachedPathGraph = None
@@ -100,6 +101,7 @@ class GameState(State):
 
 		GameState.playerGroup.update(clock, self.player, enemies, surfaces)
 		GameState.enemyGroup.update(clock, self.player, enemies, surfaces)
+		GameState.weaponGroup.update(clock, self.player, enemies, surfaces)
 
 		self.worldMap.update(clock)
 
@@ -169,12 +171,13 @@ class GameState(State):
 			self.currentMap = mmap
 			self.environment = self.wl.getMap(mmap, self.worldMap)
 
-      		# Added for debugging purposes. Remove when not needed
-        	print "MAP: ", mmap
-		GameState.enemyGroup.empty()
-		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
-		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
-		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+			# Added for debugging purposes. Remove when not needed
+			print "MAP: ", mmap
+			GameState.enemyGroup.empty()
+			GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+			GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+			GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+			GameState.weaponGroup.empty()
 
 	def draw(self):
 		#draw environment
@@ -185,6 +188,9 @@ class GameState(State):
 
 		# draw enemies
 		GameState.enemyGroup.draw(self.main.screen)
+
+		# draw weapons
+		GameState.weaponGroup.draw(self.main.screen)
 
 		# draw gui
 		self.hud.draw(self.main.screen)

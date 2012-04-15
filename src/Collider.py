@@ -54,7 +54,7 @@ class Collider(Actor.Actor):
 
 		for enemy in enemies:
 			self.collide(xpos, ypos, enemy)
-			self.hitenemy(clock, player)
+			self.hitenemy(clock, enemy)
 
 		for surface in surfaces:
 			self.collide(xpos, ypos, surface)

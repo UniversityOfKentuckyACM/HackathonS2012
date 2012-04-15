@@ -30,7 +30,7 @@ class Enemy(NPC.NPC):
 		#check if dead
 		if (self.health <= 0):
 			self.alive = False
-			self.remove(self.gamestate.enemyGroup)
+			self.remove(self.gameState.enemyGroup)
 			return
 		self.movetowards(player.rect.centerx, player.rect.centery)
 		super(Enemy, self).update(clock, player, enemies, surfaces)

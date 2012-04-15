@@ -9,8 +9,9 @@ import pygame.transform
 import math
 
 # Local settings
-MAGIC_SPEED = Vector2(3, 3)
+MAGIC_SPEED = 5
 MAGIC_ATTACK_IMAGE = "fireballRight.png"
+MAGIC_DAMAGE = 2
 
 class Magic(Collider):
 		'''
@@ -27,16 +28,26 @@ class Magic(Collider):
 				Magic.loadedImage,tmp = util.loadImage(MAGIC_ATTACK_IMAGE)
 
 			self.setImage(Magic.loadedImage)
-
 			self.setPos(x, y)
-
-			self.setVel(direction.normalized()*3)
-
+			self.setVel(direction.normalized() * MAGIC_SPEED)
 			self.image = pygame.transform.rotate(self.image,270+360*(math.atan2(self.vel.x,self.vel.y)/6.28))
 
 		#Use to find coordinates of mouse relative to current pos. Set Vector
 		def magicPath(self):
 				pass
+
+		def damage(self, target):
+			target.damaged(MAGIC_DAMAGE)
+
+		def hitplayer(self, clock, player):
+			if self.collidex or self.collidey:
+				self.damage(player)
+			super(Magic, self).hitplayer(clock, player)
+
+		def hitenemy(self, clock, enemy):
+			if self.collidex or self.collidey:
+				self.damage(enemy)
+			super(Magic, self).hitenemy(clock, enemy)
 
 		def update(self, clock, player, enemies, surfaces):
 			super(Magic,self).update(clock, player, enemies, surfaces)
