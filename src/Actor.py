@@ -69,6 +69,14 @@ class Actor(pygame.sprite.Sprite):
 	def getVel(self):
 		return self.vel
 
+	def sqDistanceFrom(self,other):
+		return (other.rect.center[0] - self.rect.center[0])**2 +\
+			(other.rect.center[1] - self.rect.center[1])**2
+			
+	def sqDistanceFrom(self,pos):
+		return (pos[0] - self.rect.center[0])**2 +\
+			(pos[1] - self.rect.center[0])**2
+
 	def update(self, clock):
 		"""
 			Move rect+image (vel[0], vel[1]) pixels

@@ -9,6 +9,11 @@ import sys
 import math
 import os
 
+import NPC
+from Enemy import Enemy
+
+from random import *
+
 from State import State
 from Actor import Actor
 from Player import Player
@@ -16,15 +21,30 @@ from WorldLoader import WorldLoader
 from WorldMap import WorldMap
 from HUDManager import HUDManager
 from Vector2 import Vector2
+from time import *
 import config
+
 class GameState(State):
 	'''
 		State for game playing mode.
 	'''
-
 	bgGroup = pygame.sprite.OrderedUpdates()
 	playerGroup = pygame.sprite.RenderPlain()
 	guiGroup = pygame.sprite.OrderedUpdates()
+	enemyGroup = pygame.sprite.RenderPlain()
+	player = None
+	terrainLayer = None
+	cachedPathGraph = None
+	curPathGraph = None
+
+	def getPlayer():
+		assert(player != None)
+		return GameState.player
+	
+	@staticmethod
+	def getCurrentAtMap():
+		assert(GameState.terrainLayer != None)
+		return GameState.terrainLayer.getMap().getAtLayer()
 
 	def __init__(self, main):
 		# transition from another state
@@ -45,12 +65,24 @@ class GameState(State):
 
 		# Initialize HUD
 		self.hud = HUDManager()
-		'''TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
+		#TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
+
+		self.tstick = 0
+		
+		GameState.enemyGroup.add(Enemy(self, self.player.rect.left, self.player.rect.top, "skeleton"))
+		GameState.enemyGroup.sprites()[0].movetowards(self.player.rect.left, self.player.rect.top)
+
+		#''' npc_one = NPC(self, 30, 30, "Skeleton") '''
+		'''TODO: FIX MUSIC
+		pygame.mixer.init()
+		filename = "worldAmbient.ogg"
+
 		path = os.path.join(util.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
 		'''
+
 	def __del__(self):
 		# transition to another state
 		super(GameState, self).__del__()
@@ -58,14 +90,34 @@ class GameState(State):
 	def loadPlayer(self):
 		self.player = Player(self)
 		self.player.mapPos = [0,0]
+
 		GameState.playerGroup.add(self.player)
 
 	def update(self, clock):
-		super(GameState, self).update(clock);
+		super(GameState, self).update(clock)
 		GameState.guiGroup.update(clock)
 		GameState.playerGroup.update(clock, [x.rect for x in self.environment.atGroup])
 
 		self.worldMap.update(clock)
+		
+		for i in range(0, len(GameState.enemyGroup.sprites())):
+			x = (self.player.rect.left + self.player.rect.right) / 2
+			y = (self.player.rect.top + self.player.rect.bottom) / 2
+			GameState.enemyGroup.sprites()[i].movetowards(x, y)
+		#	print self.tstick
+			if (self.tstick == 0):
+				if (self.player.rect.colliderect(GameState.enemyGroup.sprites()[i].rect)):
+					GameState.enemyGroup.sprites()[i].attack(self.player, 1)
+		#			print "AAAAAHHHHHHHHH!!!!!"
+				self.tstick = pygame.time.get_ticks()
+			elif (self.tstick < 100000):
+				self.tstick = self.tstick + pygame.time.get_ticks()
+		#		print self.tstick
+			else:
+				self.tstick = 0
+
+		GameState.enemyGroup.update(clock, [x.rect for x in self.environment.atGroup])
+		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
 		super(GameState, self).handleEvent()
@@ -133,17 +185,23 @@ class GameState(State):
 
       		# Added for debugging purposes. Remove when not needed
         	print "MAP: ", mmap
+		GameState.enemyGroup.empty()
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, randrange(1, config.WIDTH), randrange(1, config.HEIGHT), "skeleton"))
 
 	def draw(self):
 		#draw environment
-		#self.main.screen.blit(self.environment, self.environment.get_rect())
 		self.environment.drawBackground(self.main.screen);
 
 		# draw player
 		GameState.playerGroup.draw(self.main.screen)
+		
+		# draw enemies
+		GameState.enemyGroup.draw(self.main.screen)
 
 		# draw gui
-		# self.hud.draw(self.main.screen)
+		self.hud.draw(self.main.screen)
 
 		# draw foreground
 		self.environment.drawForeground(self.main.screen)
