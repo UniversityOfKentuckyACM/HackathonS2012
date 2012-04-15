@@ -86,7 +86,9 @@ class WorldMap(object):
 
 				# map is x,y so swap j and i
 				tile = '.'
-				if map.atLayer[j][i] != '.':
+				if map.overLayer[j][i] != '.':
+					tile = map.overLayer[j][i]
+				elif map.atLayer[j][i] != '.':
 					tile = map.atLayer[j][i]
 				else:
 					tile = map.belowLayer[j][i]
