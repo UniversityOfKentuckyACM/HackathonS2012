@@ -39,14 +39,7 @@ class WorldMap(object):
 		self.fadeSurface.fill((0,0,0))
 		self.fadeSurface.set_alpha(180)
 
-
-		# Iterate through each map and generate image
-		for i in range(self.worldDimRows):
-			for j in range(self.worldDimCols):
-				self.genImage(i,j)
-
 	def genImage(self, row, col):
-		#print("(%d, %d)" % (row, col))
 		# Load current map
 		layer = TerrainLayer(self.wl.world[(col,row)])
 		map = Map(self.wl.world[(col, row)])
