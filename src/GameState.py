@@ -40,7 +40,7 @@ class GameState(State):
 	def getPlayer():
 		assert(player != None)
 		return GameState.player
-	
+
 	@staticmethod
 	def getCurrentAtMap():
 		assert(GameState.terrainLayer != None)
@@ -67,9 +67,7 @@ class GameState(State):
 		self.hud = HUDManager()
 		#TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
 
-		self.tstick = 0
-		
-		GameState.enemyGroup.add(Enemy(self, self.player.rect.left, self.player.rect.top, "skeleton"))
+		GameState.enemyGroup.add(Enemy(self, self.player.rect.left - 50, self.player.rect.top - 50, "skeleton"))
 		GameState.enemyGroup.sprites()[0].movetowards(self.player.rect.left, self.player.rect.top)
 
 		#''' npc_one = NPC(self, 30, 30, "Skeleton") '''
@@ -96,27 +94,15 @@ class GameState(State):
 	def update(self, clock):
 		super(GameState, self).update(clock)
 		GameState.guiGroup.update(clock)
-		GameState.playerGroup.update(clock, [x.rect for x in self.environment.atGroup])
+
+		enemies = [enemy for enemy in GameState.enemyGroup]
+		surfaces = [surface for surface in self.environment.atGroup]
+
+		GameState.playerGroup.update(clock, self.player, enemies, surfaces)
+		GameState.enemyGroup.update(clock, self.player, enemies, surfaces)
 
 		self.worldMap.update(clock)
-		
-		for i in range(0, len(GameState.enemyGroup.sprites())):
-			x = (self.player.rect.left + self.player.rect.right) / 2
-			y = (self.player.rect.top + self.player.rect.bottom) / 2
-			GameState.enemyGroup.sprites()[i].movetowards(x, y)
-		#	print self.tstick
-			if (self.tstick == 0):
-				if (self.player.rect.colliderect(GameState.enemyGroup.sprites()[i].rect)):
-					GameState.enemyGroup.sprites()[i].attack(self.player, 1)
-		#			print "AAAAAHHHHHHHHH!!!!!"
-				self.tstick = pygame.time.get_ticks()
-			elif (self.tstick < 100000):
-				self.tstick = self.tstick + pygame.time.get_ticks()
-		#		print self.tstick
-			else:
-				self.tstick = 0
 
-		GameState.enemyGroup.update(clock, [x.rect for x in self.environment.atGroup])
 		self.hud.update(clock, self.player)
 
 	def handleEvent(self):
@@ -196,7 +182,7 @@ class GameState(State):
 
 		# draw player
 		GameState.playerGroup.draw(self.main.screen)
-		
+
 		# draw enemies
 		GameState.enemyGroup.draw(self.main.screen)
 
