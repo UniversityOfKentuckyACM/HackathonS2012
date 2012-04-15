@@ -57,6 +57,7 @@ class GameState(State):
 		GameState.terrainLayer = self.background
 		self.currentMap = startMap
 		self.hud = HUDManager()
+		self.timesincelastdamage = 0
 		
 		GameState.enemyGroup.add(Enemy(self, self.player.rect.left, self.player.rect.top, "skeleton"))
 		GameState.enemyGroup.sprites()[0].movetowards(self.player.rect.left, self.player.rect.top)
