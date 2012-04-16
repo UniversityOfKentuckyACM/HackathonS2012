@@ -45,12 +45,13 @@ class GameState(State):
 
 		# Initialize HUD
 		self.hud = HUDManager()
-		'''TODO: FIX MUSIC pygame.mixer.init() filename = "worldAmbient.ogg"
-		path = os.path.join(util.GAME_SOUNDS, filename)
+		pygame.mixer.init() 
+		filename = "worldAmbient.ogg"
+		path = os.path.join(config.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
 		pygame.mixer.music.play()
-		'''
+
 	def __del__(self):
 		# transition to another state
 		super(GameState, self).__del__()
