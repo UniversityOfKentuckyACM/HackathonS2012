@@ -50,7 +50,7 @@ class GameState(State):
 		path = os.path.join(config.GAME_SOUNDS, filename)
 		path = util.filepath(path)
 		pygame.mixer.music.load(path)
-		pygame.mixer.music.play()
+		pygame.mixer.music.play(-1)
 
 	def __del__(self):
 		# transition to another state
